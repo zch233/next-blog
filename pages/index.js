@@ -8,7 +8,7 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <img src="/img.jpg" alt="Vercel Logo" className="logo" />
       <Link href="/post/post">
         <a>To Post</a>
       </Link>
