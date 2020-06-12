@@ -18,6 +18,8 @@
     "sass": "^1.26.8"
   },
   "devDependencies": {
-    "tailwindcss": "^1.4.6"
+    "@types/node": "^14.0.13",
+    "tailwindcss": "^1.4.6",
+    "typescript": "^3.9.5"
   }
 }
