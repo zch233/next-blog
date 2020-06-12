@@ -8,6 +8,12 @@ export default function Post () {
       <Link href="/">
         <a>Back to home</a>
       </Link>
+
+      <style jsx>{`
+        h1 {
+          display: flex;
+        }
+      `}</style>
     </div>
   )
 }
