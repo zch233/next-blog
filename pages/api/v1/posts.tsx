@@ -1,10 +1,13 @@
 import { NextApiHandler } from "next"
 import fs, { promises as fsPromise } from 'fs'
+import path from "path";
+import {getPosts} from "lib/posts";
 
-const Posts:NextApiHandler = (req, res) => {
+const Posts:NextApiHandler = async (req, res) => {
+  const posts = await getPosts()
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/json')
-  res.write(JSON.stringify({name: 'zch'}))
+  res.write(JSON.stringify(posts))
   res.end()
 }
 
