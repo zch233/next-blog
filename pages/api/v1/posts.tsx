@@ -1,4 +1,5 @@
 import { NextApiHandler } from "next"
+import fs, { promises as fsPromise } from 'fs'
 
 const Posts:NextApiHandler = (req, res) => {
   res.statusCode = 200
