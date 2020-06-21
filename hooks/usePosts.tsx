@@ -1,12 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
 
-interface Post {
-  id: string,
-  date: string,
-  content: string,
-  title: string,
-}
 const usePosts= (): [boolean, Post[]] => {
   const [list, setList] = useState<Post[]>([])
   const [loading, setLoading] = useState(false)

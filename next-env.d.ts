@@ -10,3 +10,10 @@ declare module "*.jpg" {
   const value: string;
   export default value
 }
+
+interface Post {
+  id: string,
+  date: string,
+  content: string,
+  title: string,
+}
