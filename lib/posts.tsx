@@ -5,7 +5,7 @@ import matter from "gray-matter";
 export const getPosts = async () => {
   const markdownDir = path.join(process.cwd(), '/markdown')
   const fileNames = await fsPromise.readdir(markdownDir)
-  const list = fileNames.map(fileName => {
+  const list:Post[] = fileNames.map(fileName => {
     const filePath = path.join(markdownDir, fileName)
     const id = fileName.replace(/\.md$/, '')
     const text = fs.readFileSync(filePath, 'utf-8')

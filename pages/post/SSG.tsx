@@ -1,5 +1,5 @@
 import React from "react";
-import {NextPage} from "next";
+import {GetStaticProps, NextPage} from "next";
 import {getPosts} from "../../lib/posts";
 
 interface Props {
@@ -19,7 +19,7 @@ const PostsBSR: NextPage<Props> = ({posts}) => {
   )
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const posts = await getPosts()
   return {
     props: {
