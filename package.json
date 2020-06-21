@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
+    "axios": "^0.19.2",
     "gray-matter": "^4.0.2",
     "next": "9.4.4",
     "postcss-flexbugs-fixes": "^4.2.1",
