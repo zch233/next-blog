@@ -1,24 +1,8 @@
-import React, {useEffect,useState} from "react";
-import Axios from 'axios'
+import React from "react";
+import usePosts from "../../hooks/usePosts";
 
-interface Post {
-  id: string,
-  date: string,
-  content: string,
-  title: string,
-}
 const PostsBSR = () => {
-  const [list, setList] = useState<Post[]>([])
-  const [loading, setLoading] = useState(false)
-  useEffect(() => {
-    setLoading(true)
-    setTimeout(() => {
-      Axios.get('/api/v1/posts').then(data => {
-        setList(data.data)
-        setLoading(false)
-      })
-    }, 3000)
-  }, [])
+  const [loading, list] = usePosts()
   if (loading) return <div>loading...</div>
   return (
     <div>
