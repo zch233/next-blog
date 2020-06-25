@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:babel": "next dev",
     "build": "next build",
     "start": "next start",
-    "pack": "babel ./src --out-dir dist --extensions \".ts,.tsx\""
+    "build:typeorm": "babel -w ./src --out-dir dist --extensions .ts,.tsx",
+    "migration:run": "typeorm migration:run",
+    "migration:revert": "typeorm migration:revert"
   },
   "dependencies": {
     "@babel/cli": "^7.10.3",
