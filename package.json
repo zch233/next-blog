@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "build:typeorm": "babel -w ./src --out-dir dist --extensions .ts,.tsx",
+    "migration:create": "typeorm migration:create",
     "migration:run": "typeorm migration:run",
     "migration:revert": "typeorm migration:revert",
     "entity:create": "typeorm entity:create"
