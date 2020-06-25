@@ -10,11 +10,11 @@ export class User {
   username: string;
   @Column('varchar')
   password: string;
-  @CreateDateColumn('timestamp')
+  @CreateDateColumn()
   createdAt: Date;
-  @UpdateDateColumn('timestamp')
+  @UpdateDateColumn()
   updatedAt: Date;
-  @OneToMany(type => Post, post => post.user)
+  @OneToMany(type => Post, post => post.author)
   posts: Post[];
   @OneToMany(type => Comment, comment => comment.user)
   comments: Comment[];

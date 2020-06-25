@@ -12,9 +12,9 @@ export class Comment {
   userId: number;
   @Column('int')
   postId: number;
-  @CreateDateColumn('timestamp')
+  @CreateDateColumn()
   createdAt: Date;
-  @UpdateDateColumn('timestamp')
+  @UpdateDateColumn()
   updatedAt: Date;
   @ManyToOne(type => User, user => user.comments)
   user: User;

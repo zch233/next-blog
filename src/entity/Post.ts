@@ -20,12 +20,12 @@ export class Post {
   content: string;
   @Column('int')
   authorId: number;
-  @CreateDateColumn('timestamp')
+  @CreateDateColumn()
   createdAt: Date;
-  @UpdateDateColumn('timestamp')
+  @UpdateDateColumn()
   updatedAt: Date;
   @ManyToOne(type => User, user => user.posts)
-  user: User;
+  author: User;
   @OneToMany(type => Comment, comment => comment.post)
   comments: Comment[];
 }
