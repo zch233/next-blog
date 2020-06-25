@@ -32,12 +32,12 @@ var AddTimes1593082773827 = /*#__PURE__*/function () {
               case 0:
                 _context.next = 2;
                 return queryRunner.addColumns('users', [new _typeorm.TableColumn({
-                  name: 'createAt',
+                  name: 'createdAt',
                   type: 'time',
                   isNullable: false,
                   "default": 'now()'
                 }), new _typeorm.TableColumn({
-                  name: 'updateAt',
+                  name: 'updatedAt',
                   type: 'time',
                   isNullable: false,
                   "default": 'now()'
@@ -46,12 +46,12 @@ var AddTimes1593082773827 = /*#__PURE__*/function () {
               case 2:
                 _context.next = 4;
                 return queryRunner.addColumns('posts', [new _typeorm.TableColumn({
-                  name: 'createAt',
+                  name: 'createdAt',
                   type: 'time',
                   isNullable: false,
                   "default": 'now()'
                 }), new _typeorm.TableColumn({
-                  name: 'updateAt',
+                  name: 'updatedAt',
                   type: 'time',
                   isNullable: false,
                   "default": 'now()'
@@ -60,12 +60,12 @@ var AddTimes1593082773827 = /*#__PURE__*/function () {
               case 4:
                 _context.next = 6;
                 return queryRunner.addColumns('comments', [new _typeorm.TableColumn({
-                  name: 'createAt',
+                  name: 'createdAt',
                   type: 'time',
                   isNullable: false,
                   "default": 'now()'
                 }), new _typeorm.TableColumn({
-                  name: 'updateAt',
+                  name: 'updatedAt',
                   type: 'time',
                   isNullable: false,
                   "default": 'now()'
@@ -94,27 +94,27 @@ var AddTimes1593082773827 = /*#__PURE__*/function () {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return queryRunner.dropColumn('users', 'createAt');
+                return queryRunner.dropColumn('users', 'createdAt');
 
               case 2:
                 _context2.next = 4;
-                return queryRunner.dropColumn('users', 'updateAt');
+                return queryRunner.dropColumn('users', 'updatedAt');
 
               case 4:
                 _context2.next = 6;
-                return queryRunner.dropColumn('posts', 'createAt');
+                return queryRunner.dropColumn('posts', 'createdAt');
 
               case 6:
                 _context2.next = 8;
-                return queryRunner.dropColumn('posts', 'updateAt');
+                return queryRunner.dropColumn('posts', 'updatedAt');
 
               case 8:
                 _context2.next = 10;
-                return queryRunner.dropColumn('comments', 'createAt');
+                return queryRunner.dropColumn('comments', 'createdAt');
 
               case 10:
                 _context2.next = 12;
-                return queryRunner.dropColumn('comments', 'updateAt');
+                return queryRunner.dropColumn('comments', 'updatedAt');
 
               case 12:
               case "end":
