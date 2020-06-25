@@ -61,23 +61,32 @@ var RenameColumn1593087905634 = /*#__PURE__*/function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                _context2.prev = 0;
+                _context2.next = 3;
                 return queryRunner.renameColumn('posts', 'authorId', 'author_id');
 
-              case 2:
-                _context2.next = 4;
+              case 3:
+                _context2.next = 5;
                 return queryRunner.renameColumn('comments', 'userId', 'user_id');
 
-              case 4:
-                _context2.next = 6;
+              case 5:
+                _context2.next = 7;
                 return queryRunner.renameColumn('comments', 'postId', 'post_id');
 
-              case 6:
+              case 7:
+                _context2.next = 11;
+                break;
+
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+
+              case 11:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, null, [[0, 9]]);
       }));
 
       function down(_x2) {

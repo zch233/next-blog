@@ -33,12 +33,12 @@ var AddTimes1593082773827 = /*#__PURE__*/function () {
                 _context.next = 2;
                 return queryRunner.addColumns('users', [new _typeorm.TableColumn({
                   name: 'createdAt',
-                  type: 'time',
+                  type: 'timestamp',
                   isNullable: false,
                   "default": 'now()'
                 }), new _typeorm.TableColumn({
                   name: 'updatedAt',
-                  type: 'time',
+                  type: 'timestamp',
                   isNullable: false,
                   "default": 'now()'
                 })]);
@@ -47,12 +47,12 @@ var AddTimes1593082773827 = /*#__PURE__*/function () {
                 _context.next = 4;
                 return queryRunner.addColumns('posts', [new _typeorm.TableColumn({
                   name: 'createdAt',
-                  type: 'time',
+                  type: 'timestamp',
                   isNullable: false,
                   "default": 'now()'
                 }), new _typeorm.TableColumn({
                   name: 'updatedAt',
-                  type: 'time',
+                  type: 'timestamp',
                   isNullable: false,
                   "default": 'now()'
                 })]);
@@ -61,12 +61,12 @@ var AddTimes1593082773827 = /*#__PURE__*/function () {
                 _context.next = 6;
                 return queryRunner.addColumns('comments', [new _typeorm.TableColumn({
                   name: 'createdAt',
-                  type: 'time',
+                  type: 'timestamp',
                   isNullable: false,
                   "default": 'now()'
                 }), new _typeorm.TableColumn({
                   name: 'updatedAt',
-                  type: 'time',
+                  type: 'timestamp',
                   isNullable: false,
                   "default": 'now()'
                 })]);
@@ -93,35 +93,44 @@ var AddTimes1593082773827 = /*#__PURE__*/function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                _context2.prev = 0;
+                _context2.next = 3;
                 return queryRunner.dropColumn('users', 'createdAt');
 
-              case 2:
-                _context2.next = 4;
+              case 3:
+                _context2.next = 5;
                 return queryRunner.dropColumn('users', 'updatedAt');
 
-              case 4:
-                _context2.next = 6;
+              case 5:
+                _context2.next = 7;
                 return queryRunner.dropColumn('posts', 'createdAt');
 
-              case 6:
-                _context2.next = 8;
+              case 7:
+                _context2.next = 9;
                 return queryRunner.dropColumn('posts', 'updatedAt');
 
-              case 8:
-                _context2.next = 10;
+              case 9:
+                _context2.next = 11;
                 return queryRunner.dropColumn('comments', 'createdAt');
 
-              case 10:
-                _context2.next = 12;
+              case 11:
+                _context2.next = 13;
                 return queryRunner.dropColumn('comments', 'updatedAt');
 
-              case 12:
+              case 13:
+                _context2.next = 17;
+                break;
+
+              case 15:
+                _context2.prev = 15;
+                _context2.t0 = _context2["catch"](0);
+
+              case 17:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, null, [[0, 15]]);
       }));
 
       function down(_x2) {

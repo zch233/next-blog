@@ -9,9 +9,13 @@ export class RenameColumn1593087905634 implements MigrationInterface {
   }
 
   public async down (queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.renameColumn('posts', 'authorId', 'author_id')
-    await queryRunner.renameColumn('comments', 'userId', 'user_id')
-    await queryRunner.renameColumn('comments', 'postId', 'post_id')
+    try {
+      await queryRunner.renameColumn('posts', 'authorId', 'author_id')
+      await queryRunner.renameColumn('comments', 'userId', 'user_id')
+      await queryRunner.renameColumn('comments', 'postId', 'post_id')
+    } catch (e) {
+
+    }
   }
 
 }
