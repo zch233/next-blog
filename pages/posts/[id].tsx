@@ -1,34 +1,28 @@
 import React from "react";
-import {GetStaticPaths, GetStaticProps, NextPage} from "next";
-import {getPost, getPosts} from "../../lib/posts";
+import {GetServerSideProps, NextPage} from "next";
+import {getDatabaseConnection} from "../../lib/getDatabaseConnection";
+import {Post} from "../../src/entity/Post";
 interface Props {
   post: Post
 }
 const PostsDetail:NextPage<Props> = ({post}) => {
   return (
     <div>
-      <h1>{post.title}</h1>
-      <h2>{post.date}</h2>
-      <article dangerouslySetInnerHTML={{__html: post.content}}></article>
+      <h1>标题：{post.title}</h1>
+      <div>{post.content}</div>
     </div>
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const idList = await getPosts()
-  return {
-    paths: idList.map(v => ({params: {id: v.id}})),
-    fallback: false,
-  }
-}
+export default PostsDetail
 
-export const getStaticProps: GetStaticProps = async (paths: any) => {
-  const post = await getPost(paths.params.id)
+export const getServerSideProps: GetServerSideProps = async context => {
+  const id = context.params.id
+  const connection = await getDatabaseConnection()
+  const post = await connection.manager.findOne('posts', id)
   return {
     props: {
-      post,
+      post: JSON.parse(JSON.stringify(post))
     }
   }
 }
-
-export default PostsDetail
