@@ -1,5 +1,5 @@
 import {GetServerSideProps} from "next";
-import {createConnection, getConnection} from "typeorm";
+import {getDatabaseConnection} from "../lib/getDatabaseConnection";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const connection = await createConnection()
+  const connection = await getDatabaseConnection()
   return {
     props: {}
   }
