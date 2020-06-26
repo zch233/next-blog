@@ -20,5 +20,5 @@ createConnection().then(async connection => {
   comment.user = user
   await connection.manager.save(comment)
   await connection.close()
-
+  console.log('ok!')
 }).catch(error => console.log(error));
