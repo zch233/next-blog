@@ -11,7 +11,7 @@ interface Props {
 const Home:NextPage<Props> = ({posts}) => {
   return (
     <div className="container">
-      {posts.map(post => <Link href={`/posts/${post.id}`} key={post.id}><a>{post.title}</a></Link> )}
+      {posts.map(post => <p key={post.id}><Link href={'/posts/[id]'} as={`/posts/[id]${post.id}`}><a>{post.title}</a></Link></p> )}
     </div>
   )
 }
