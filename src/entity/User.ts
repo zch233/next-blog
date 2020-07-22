@@ -5,17 +5,17 @@ import {Comment} from './Comment'
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
   @Column('varchar')
-  username: string;
+  username?: string;
   @Column('varchar')
-  password: string;
+  password?: string;
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt?: Date;
   @OneToMany(type => Post, post => post.author)
-  posts: Post[];
+  posts?: Post[];
   @OneToMany(type => Comment, comment => comment.user)
-  comments: Comment[];
+  comments?: Comment[];
 }

@@ -5,19 +5,19 @@ import {Post} from "./Post";
 @Entity('comments')
 export class Comment {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
   @Column('text')
-  content: string;
+  content?: string;
   @Column('int')
-  userId: number;
+  userId?: number;
   @Column('int')
-  postId: number;
+  postId?: number;
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt?: Date;
   @ManyToOne(type => User, user => user.comments)
-  user: User;
+  user?: User;
   @ManyToOne(type => Post, post => post.comments)
-  post: Post
+  post?: Post
 }

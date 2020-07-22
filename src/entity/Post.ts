@@ -5,19 +5,19 @@ import {User} from './User';
 @Entity('posts')
 export class Post {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
   @Column('varchar')
-  title: string;
+  title?: string;
   @Column('text')
-  content: string;
+  content?: string;
   @Column('int')
-  authorId: number;
+  authorId?: number;
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt?: Date;
   @ManyToOne(type => User, user => user.posts)
-  author: User;
+  author?: User;
   @OneToMany(type => Comment, comment => comment.post)
-  comments: Comment[];
+  comments?: Comment[];
 }
