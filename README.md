@@ -6,7 +6,7 @@
 mkdir blog-data
 // 启动 docker 容器
 docker run -v "$PWD/blog-data":/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
-// 旧版 dokcer 不需要创建blog-data文件夹 docker run -v "/blog-data":/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
+// 旧版 dokcer 不需要创建blog-data文件夹 docker run -v "blog-data":/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
 // 进入虚拟机
 docker exec -it 对应ID bash
 // 进入数据库
