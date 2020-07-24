@@ -16,10 +16,9 @@ const PostsDetail:NextPage<Props> = ({post}) => {
 
 export default PostsDetail
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  const id = context.params.id
+export const getServerSideProps: GetServerSideProps<any, {id:string}> = async context => {
   const connection = await getDatabaseConnection()
-  const post = await connection.manager.findOne(Post,1)
+  const post = await connection.manager.findOne(Post, context.params?.id)
   return {
     props: {
       post: JSON.parse(JSON.stringify(post))

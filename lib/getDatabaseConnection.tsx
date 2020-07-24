@@ -18,6 +18,6 @@ const promise = (async function () {
   })
 })()
 
-export const getDatabaseConnection = async () => {
+export const getDatabaseConnection = () => {
   return promise
 }
