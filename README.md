@@ -1,5 +1,14 @@
-# 初始代码
-
+## 清空此前的开发环境
+```
+docker kill 容器id
+docker rm 容器id
+// 新版 docker
+rm -rf 容器id
+// 旧版 docker
+docker container prune
+docker image prune
+docker volume rm blog-data
+```
 ## 启动数据库
 ```
 // 创建目录，与下列命令对应
@@ -18,6 +27,7 @@ psql -U blog
 drop database blog_development;
 // 创建数据库
 CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
+// 检查 ormconfig.json 中的配置
 // 升级数据表 or 降级数据表
 yarn migration:run or yarn migration:revert
 // 填充数据
