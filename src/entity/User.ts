@@ -74,6 +74,11 @@ export class User {
     return !!Object.values(this.errors).find(v => v.length > 0);
   }
 
+  toJSON () {
+    return { id: this.id, username: this.username }
+  }
+
+
   @BeforeInsert()
   generatePasswordDigest () {
     this.passwordDigest = this.password;

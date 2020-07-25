@@ -137,6 +137,14 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.PrimaryGe
       });
     }
   }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        id: this.id,
+        username: this.username
+      };
+    }
+  }, {
     key: "generatePasswordDigest",
     value: function generatePasswordDigest() {
       this.passwordDigest = this.password;

@@ -17,7 +17,7 @@ const Posts: NextApiHandler = async (req, res) => {
   } else {
     res.statusCode = 200;
     await connection.manager.save(user)
-    res.write(JSON.stringify({mas: '成功'}));
+    res.write(JSON.stringify(user));
   }
   res.end();
 };
