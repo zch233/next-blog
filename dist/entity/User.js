@@ -110,14 +110,14 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.PrimaryGe
               case 10:
                 connection = _context.sent;
                 _context.next = 13;
-                return connection.manager.find(User, {
+                return connection.manager.findOne(User, {
                   username: this.username
                 });
 
               case 13:
                 hasUser = _context.sent;
 
-                if (hasUser.length > 0) {
+                if (hasUser) {
                   this.errors.username.push('用户名已存在');
                 }
 

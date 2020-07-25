@@ -57,8 +57,8 @@ export class User {
       this.errors.passwordConfirmation.push('两次密码不一致');
     }
     const connection = await getDatabaseConnection();
-    const hasUser = await connection.manager.find(User, {username: this.username});
-    if (hasUser.length > 0) {
+    const hasUser = await connection.manager.findOne(User, {username: this.username});
+    if (hasUser) {
       this.errors.username.push('用户名已存在')
     }
   };
