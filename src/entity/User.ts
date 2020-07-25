@@ -18,4 +18,8 @@ export class User {
   posts?: Post[];
   @OneToMany(type => Comment, comment => comment.user)
   comments?: Comment[];
+
+  async validate () {
+
+  }
 }
