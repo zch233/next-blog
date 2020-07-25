@@ -38,7 +38,7 @@ var CreateComments1593082527124 = /*#__PURE__*/function () {
                     isGenerated: true,
                     type: 'int',
                     isPrimary: true,
-                    generationStrategy: "increment"
+                    generationStrategy: 'increment'
                   }, {
                     name: 'user_id',
                     type: 'int'

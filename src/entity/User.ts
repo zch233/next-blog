@@ -1,12 +1,21 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
-import {Post} from "./Post";
-import {Comment} from './Comment'
-import {getDatabaseConnection} from '../../lib/getDatabaseConnection';
+import {
+  BeforeInsert,
+  Column, Connection,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import {Post} from './Post';
+import {Comment} from './Comment';
+
 interface Errors {
   username: string[],
   password: string[],
   passwordConfirmation: string[],
 }
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('increment')
@@ -14,7 +23,7 @@ export class User {
   @Column('varchar')
   username: string;
   @Column('varchar')
-  password: string;
+  passwordDigest: string;
   @CreateDateColumn({type: 'timestamp'})
   createdAt: Date;
   @UpdateDateColumn({type: 'timestamp'})
@@ -24,14 +33,14 @@ export class User {
   @OneToMany(type => Comment, comment => comment.user)
   comments: Comment[];
 
-  passwordConfirmation: string
+  password: string;
+  passwordConfirmation: string;
   errors: Errors = {
     username: [],
     password: [],
     passwordConfirmation: [],
   };
-  async validate () {
-
+  async validate (connection: Connection) {
     if (this.username === '') {
       this.errors.username.push('用户名不能为空');
     }
@@ -56,13 +65,17 @@ export class User {
     if (this.password !== this.passwordConfirmation) {
       this.errors.passwordConfirmation.push('两次密码不一致');
     }
-    const connection = await getDatabaseConnection();
     const hasUser = await connection.manager.findOne(User, {username: this.username});
     if (hasUser) {
-      this.errors.username.push('用户名已存在')
+      this.errors.username.push('用户名已存在');
     }
   };
   hasError () {
-    return !!Object.values(this.errors).find(v => v.length > 0)
+    return !!Object.values(this.errors).find(v => v.length > 0);
+  }
+
+  @BeforeInsert()
+  generatePasswordDigest () {
+    this.passwordDigest = this.password;
   }
 }

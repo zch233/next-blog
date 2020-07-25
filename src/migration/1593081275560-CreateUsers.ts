@@ -8,7 +8,7 @@ export class CreateUsers1593081275560 implements MigrationInterface {
       columns: [
         {name: 'id', isGenerated: true, type: 'int', isPrimary: true, generationStrategy: "increment"},
         {name: 'username', type: 'varchar'},
-        {name: 'password', type: 'varchar'}
+        {name: 'password_digest', type: 'varchar'}
       ]
     }))
   }

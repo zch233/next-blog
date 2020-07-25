@@ -38,7 +38,7 @@ var CreatePosts1593082278943 = /*#__PURE__*/function () {
                     isGenerated: true,
                     type: 'int',
                     isPrimary: true,
-                    generationStrategy: "increment"
+                    generationStrategy: 'increment'
                   }, {
                     name: 'title',
                     type: 'varchar'

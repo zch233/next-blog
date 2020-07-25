@@ -9,8 +9,8 @@ const Posts: NextApiHandler = async (req, res) => {
   user.username = username.trim();
   user.password = password;
   user.passwordConfirmation = passwordConfirmation
-  res.setHeader('Content-Type', 'application/json');
-  await user.validate()
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  await user.validate(connection)
   if (user.hasError()) {
     res.statusCode = 422;
     res.write(JSON.stringify(user.errors));

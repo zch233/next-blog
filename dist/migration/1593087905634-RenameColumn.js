@@ -29,17 +29,21 @@ var RenameColumn1593087905634 = /*#__PURE__*/function () {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return queryRunner.renameColumn('posts', 'author_id', 'authorId');
+                return queryRunner.renameColumn('users', 'password_digest', 'passwordDigest');
 
               case 2:
                 _context.next = 4;
-                return queryRunner.renameColumn('comments', 'user_id', 'userId');
+                return queryRunner.renameColumn('posts', 'author_id', 'authorId');
 
               case 4:
                 _context.next = 6;
-                return queryRunner.renameColumn('comments', 'post_id', 'postId');
+                return queryRunner.renameColumn('comments', 'user_id', 'userId');
 
               case 6:
+                _context.next = 8;
+                return queryRunner.renameColumn('comments', 'post_id', 'postId');
+
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -63,30 +67,34 @@ var RenameColumn1593087905634 = /*#__PURE__*/function () {
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return queryRunner.renameColumn('posts', 'authorId', 'author_id');
+                return queryRunner.renameColumn('users', 'passwordDigest', 'password_digest');
 
               case 3:
                 _context2.next = 5;
-                return queryRunner.renameColumn('comments', 'userId', 'user_id');
+                return queryRunner.renameColumn('posts', 'authorId', 'author_id');
 
               case 5:
                 _context2.next = 7;
-                return queryRunner.renameColumn('comments', 'postId', 'post_id');
+                return queryRunner.renameColumn('comments', 'userId', 'user_id');
 
               case 7:
-                _context2.next = 11;
-                break;
+                _context2.next = 9;
+                return queryRunner.renameColumn('comments', 'postId', 'post_id');
 
               case 9:
-                _context2.prev = 9;
-                _context2.t0 = _context2["catch"](0);
+                _context2.next = 13;
+                break;
 
               case 11:
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](0);
+
+              case 13:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 9]]);
+        }, _callee2, null, [[0, 11]]);
       }));
 
       function down(_x2) {
