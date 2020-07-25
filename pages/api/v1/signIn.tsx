@@ -1,6 +1,7 @@
 import {NextApiHandler} from 'next';
 import {SignIn} from '../../../src/model/SignIn';
 import {getDatabaseConnection} from '../../../lib/getDatabaseConnection';
+import {withSession} from '../../../lib/withSesstion';
 
 const Login: NextApiHandler = async (req, res) => {
   const {username = '', password = ''} = req.body;
@@ -14,10 +15,14 @@ const Login: NextApiHandler = async (req, res) => {
     res.statusCode = 422;
     res.write(JSON.stringify(signIn.errors));
   } else {
+    // @ts-ignore
+    req.session.set('user', signIn.user)
+    // @ts-ignore
+    await req.session.save()
     res.statusCode = 200;
     res.write(JSON.stringify(signIn.user));
   }
   res.end();
 };
 
-export default Login;
+export default withSession(Login);
