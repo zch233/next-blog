@@ -1,7 +1,7 @@
 import {GetServerSideProps, NextPage} from "next";
-import {getDatabaseConnection} from "../lib/getDatabaseConnection";
+import {getDatabaseConnection} from "../../lib/getDatabaseConnection";
 import React from "react";
-import {Post} from "../src/entity/Post";
+import {Post} from "../../src/entity/Post";
 import Link from "next/link";
 
 
