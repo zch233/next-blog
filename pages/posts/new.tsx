@@ -18,7 +18,10 @@ const NewPost: NextPage = () => {
       },
     ],
     initFormData: {title: '', content: ''},
-    submit: (formData) => axios.post('/api/v1/posts', formData).then(() => window.alert('创建成功')),
+    submit: (formData) => axios.post('/api/v1/posts', formData).then(() => {
+      window.alert('创建成功')
+      window.location.href = '/posts'
+    }),
   });
   return (
     <div>

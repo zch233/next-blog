@@ -23,7 +23,10 @@ const SignUp: NextPage = () => {
       },
     ],
     initFormData: { username: '', password: '', passwordConfirmation: '' },
-    submit: (formData) => axios.post('/api/v1/createUser', formData).then(() => window.alert('注册成功'))
+    submit: (formData) => axios.post('/api/v1/createUser', formData).then(() => {
+      window.alert('注册成功')
+      window.location.href = '/sign_in'
+    })
   })
   return (
     <>

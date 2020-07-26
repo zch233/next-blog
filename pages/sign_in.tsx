@@ -4,6 +4,7 @@ import axios from 'axios'
 import {withSession} from '../lib/withSesstion';
 import {User} from '../src/entity/User';
 import {userForm} from '../lib/userForm';
+import queryString from 'query-string';
 
 
 const SignIn: NextPage<{user: User}> = (props) => {
@@ -21,7 +22,11 @@ const SignIn: NextPage<{user: User}> = (props) => {
       },
     ],
     initFormData: { username: '', password: '' },
-    submit: (formData) => axios.post('/api/v1/signIn', formData).then(() => window.alert('登陆成功'))
+    submit: (formData) => axios.post('/api/v1/signIn', formData).then(() => {
+      window.alert('登陆成功')
+      const redirect = queryString.parse(window.location.search).redirect
+      window.location.href = redirect.toString() || '/posts'
+    })
   })
   return (
     <>

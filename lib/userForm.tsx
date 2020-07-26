@@ -1,4 +1,5 @@
 import React, {ReactChild, useCallback, useState} from 'react';
+import {AxiosResponse} from 'axios';
 
 interface Field<T> {
   label: string;
@@ -26,7 +27,13 @@ export function userForm<T> (userFormOptions: UserFormOptions<T>) {
   const onSubmit = useCallback((e) => {
     e.preventDefault();
     submit(formData).catch((err) => {
-      setErrors(err.response.data);
+      const response: AxiosResponse = err.response
+      if (response.status === 422) {
+        setErrors(response.data);
+      } else if (response.status === 401) {
+        window.alert('请登录')
+        window.location.href = `/sign_in?redirect=${encodeURIComponent(window.location.pathname)}`
+      }
     });
   }, [formData]);
   const onChange = useCallback((e, type: keyof T) => {

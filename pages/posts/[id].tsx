@@ -2,6 +2,7 @@ import React from "react";
 import {GetServerSideProps, NextPage} from "next";
 import {getDatabaseConnection} from "../../lib/getDatabaseConnection";
 import {Post} from "../../src/entity/Post";
+import Link from 'next/link';
 interface Props {
   post: Post
 }
@@ -10,6 +11,7 @@ const PostsDetail:NextPage<Props> = ({post}) => {
     <div>
       <h1>标题：{post.title}</h1>
       <div>{post.content}</div>
+      <Link href="/posts"><a>返回文章列表</a></Link>
     </div>
   )
 }
