@@ -39,7 +39,7 @@ export function userForm<T> (userFormOptions: UserFormOptions<T>) {
           <label>
             {field.label}：
             {field.inputType === 'textarea' ?
-              <textarea value={formData[field.key].toString()}/> :
+              <textarea value={formData[field.key].toString()} onChange={(e) => onChange(e, field.key)}/> :
               <input type={field.inputType} value={formData[field.key].toString()}
                      onChange={(e) => onChange(e, field.key)}/>
             }
