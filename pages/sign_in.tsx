@@ -1,52 +1,33 @@
 import {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next';
-import React, {useCallback, useState} from 'react';
-import Axios from 'axios'
+import React from 'react';
+import axios from 'axios'
 import {withSession} from '../lib/withSesstion';
 import {User} from '../src/entity/User';
+import {userForm} from '../lib/userForm';
 
-const Errors = (props: {errors:string[]}) => <div>{props.errors.join('，')}</div>
 
 const SignIn: NextPage<{user: User}> = (props) => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
-  const [errors, setErrors] = useState({
-    username: [],
-    password: [],
-  });
-  const onChange = useCallback((e, type) => {
-    setFormData({...formData, [type]: e.target.value})
-  }, [formData]);
-  const onSubmit = useCallback((e) => {
-    e.preventDefault();
-    Axios.post('/api/v1/signIn', formData).then(data => {
-      console.log(data)
-    }).catch(err => {
-      setErrors(err.response.data)
-    })
-  }, [formData]);
+  const {form} = userForm({
+    fields: [
+      {
+        label: '帐号',
+        inputType: 'text',
+        key: 'username',
+      },
+      {
+        label: '密码',
+        inputType: 'password',
+        key: 'password',
+      },
+    ],
+    initFormData: { username: '', password: '' },
+    submit: (formData) => axios.post('/api/v1/signIn', formData).then(() => window.alert('登陆成功'))
+  })
   return (
     <>
       {props.user?.username}
       <h1>登陆</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>
-            帐号：
-            <input type="text" value={formData.username} onChange={(e) => onChange(e, 'username')}/>
-          </label>
-          <Errors errors={errors.username} />
-        </div>
-        <div>
-          <label>
-            密码：
-            <input type="text" value={formData.password} onChange={(e) => onChange(e, 'password')}/>
-          </label>
-          <Errors errors={errors.password} />
-        </div>
-        <input type="submit"/>
-      </form>
+      {form}
     </>
   );
 };
