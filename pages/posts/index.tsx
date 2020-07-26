@@ -8,7 +8,7 @@ import Link from "next/link";
 interface Props {
   posts: Post[]
 }
-const Home:NextPage<Props> = ({posts}) => {
+const PostsIndex:NextPage<Props> = ({posts}) => {
   return (
     <div className="container">
       <h1>文章列表 <Link href="/posts/new"><a>开始创作</a></Link></h1>
@@ -17,7 +17,7 @@ const Home:NextPage<Props> = ({posts}) => {
   )
 }
 
-export default Home
+export default PostsIndex
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const connection = await getDatabaseConnection()
