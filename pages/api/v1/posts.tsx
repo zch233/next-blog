@@ -9,13 +9,20 @@ const Posts: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
     const {title, content} = req.body;
     const post = new Post();
-    post.title = title;
-    post.content = content;
+    post.title = title.trim();
+    post.content = content.trim();
+    await post.validate()
     // @ts-ignore
     const user = req.session.get('user');
     if (!user) {
       res.statusCode = 401;
       res.write(JSON.stringify({msg: '请登录'}));
+      res.end();
+      return;
+    }
+    if (post.hasError()) {
+      res.statusCode = 422;
+      res.write(JSON.stringify(post.errors));
       res.end();
       return;
     }

@@ -7,9 +7,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Post = void 0;
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
 var _initializerDefineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/initializerDefineProperty"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
@@ -37,17 +43,63 @@ var Post = (_dec = (0, _typeorm.Entity)('posts'), _dec2 = (0, _typeorm.PrimaryGe
   return _Comment.Comment;
 }, function (comment) {
   return comment.post;
-}), _dec(_class = (_class2 = (_temp = function Post() {
-  (0, _classCallCheck2["default"])(this, Post);
-  (0, _initializerDefineProperty2["default"])(this, "id", _descriptor, this);
-  (0, _initializerDefineProperty2["default"])(this, "title", _descriptor2, this);
-  (0, _initializerDefineProperty2["default"])(this, "content", _descriptor3, this);
-  (0, _initializerDefineProperty2["default"])(this, "authorId", _descriptor4, this);
-  (0, _initializerDefineProperty2["default"])(this, "createdAt", _descriptor5, this);
-  (0, _initializerDefineProperty2["default"])(this, "updatedAt", _descriptor6, this);
-  (0, _initializerDefineProperty2["default"])(this, "author", _descriptor7, this);
-  (0, _initializerDefineProperty2["default"])(this, "comments", _descriptor8, this);
-}, _temp), (_descriptor = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "id", [_dec2], {
+}), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function () {
+  function Post() {
+    (0, _classCallCheck2["default"])(this, Post);
+    (0, _initializerDefineProperty2["default"])(this, "id", _descriptor, this);
+    (0, _initializerDefineProperty2["default"])(this, "title", _descriptor2, this);
+    (0, _initializerDefineProperty2["default"])(this, "content", _descriptor3, this);
+    (0, _initializerDefineProperty2["default"])(this, "authorId", _descriptor4, this);
+    (0, _initializerDefineProperty2["default"])(this, "createdAt", _descriptor5, this);
+    (0, _initializerDefineProperty2["default"])(this, "updatedAt", _descriptor6, this);
+    (0, _initializerDefineProperty2["default"])(this, "author", _descriptor7, this);
+    (0, _initializerDefineProperty2["default"])(this, "comments", _descriptor8, this);
+    (0, _defineProperty2["default"])(this, "errors", {
+      title: [],
+      content: []
+    });
+  }
+
+  (0, _createClass2["default"])(Post, [{
+    key: "validate",
+    value: function () {
+      var _validate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (this.title === '') {
+                  this.errors.title.push('标题不能为空');
+                }
+
+                if (this.content === '') {
+                  this.errors.content.push('内容不能为空');
+                }
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function validate() {
+        return _validate.apply(this, arguments);
+      }
+
+      return validate;
+    }()
+  }, {
+    key: "hasError",
+    value: function hasError() {
+      return !!Object.values(this.errors).find(function (v) {
+        return v.length > 0;
+      });
+    }
+  }]);
+  return Post;
+}(), _temp), (_descriptor = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "id", [_dec2], {
   configurable: true,
   enumerable: true,
   writable: true,
