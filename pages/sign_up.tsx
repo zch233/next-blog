@@ -1,6 +1,6 @@
 import {NextPage} from 'next';
 import React from 'react';
-import {userForm} from '../lib/userForm';
+import {userForm} from '../hooks/userForm';
 import axios from 'axios';
 
 const SignUp: NextPage = () => {

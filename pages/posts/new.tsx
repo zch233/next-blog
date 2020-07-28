@@ -1,6 +1,6 @@
 import React from 'react';
 import {NextPage} from 'next';
-import {userForm} from '../../lib/userForm';
+import {userForm} from '../../hooks/userForm';
 import axios from 'axios';
 
 const NewPost: NextPage = () => {
