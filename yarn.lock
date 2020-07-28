@@ -1338,6 +1338,14 @@
   resolved "https://registry.npm.taobao.org/@types/color-name/download/@types/color-name-1.1.1.tgz?cache=0&sync_timestamp=1588200580715&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fcolor-name%2Fdownload%2F%40types%2Fcolor-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha1-HBJhu+qhCoBVu8XYq4S3sq/IRqA=
 
+"@types/hoist-non-react-statics@*":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
+  integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
+  dependencies:
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+
 "@types/json-schema@^7.0.4":
   version "7.0.5"
   resolved "https://registry.npm.taobao.org/@types/json-schema/download/@types/json-schema-7.0.5.tgz?cache=0&sync_timestamp=1591720965091&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fjson-schema%2Fdownload%2F%40types%2Fjson-schema-7.0.5.tgz#dcce4430e64b443ba8945f0290fb564ad5bac6dd"
@@ -1370,12 +1378,29 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-native@*":
+  version "0.63.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.2.tgz#428a4d71351ccbc31ab170b5f32477c7ce78dfd7"
+  integrity sha512-oxbp084lUsZvwfdWmWxKjJAuqEraQDRf+cE/JgwmrHQMguSrmgIHZ3xkeoQ5FYnW5NHIPpHudB3BbjL1Zn3vnA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.9.36":
   version "16.9.36"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.36.tgz#ade589ff51e2a903e34ee4669e05dbfa0c1ce849"
   integrity sha1-reWJ/1HiqQPjTuRmngXb+gwc6Ek=
   dependencies:
     "@types/prop-types" "*"
+    csstype "^2.2.0"
+
+"@types/styled-components@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.1.1.tgz#17c3b3a299aa38254189e04a72a8ee009a22e42d"
+  integrity sha512-fIjKvDU1LJExBZWEQilHqzfpOK4KUwBsj5zC79lxa94ekz8oDQSBNcayMACBImxIuevF+NbBGL9O/2CQ67Zhig==
+  dependencies:
+    "@types/hoist-non-react-statics" "*"
+    "@types/react" "*"
+    "@types/react-native" "*"
     csstype "^2.2.0"
 
 "@webassemblyjs/ast@1.9.0":
@@ -3529,7 +3554,7 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.0.0:
+hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
