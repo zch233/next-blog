@@ -12,7 +12,6 @@ const Posts: NextApiHandler = async (req, res) => {
     post.title = title.trim();
     post.content = content.trim();
     await post.validate()
-    // @ts-ignore
     const user = req.session.get('user');
     if (!user) {
       res.statusCode = 401;
