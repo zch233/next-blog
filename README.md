@@ -49,3 +49,94 @@ docker valume rm blog-data
 ```
 yarn dev:babel
 ```
+
+## 部署
+[https://nodejs.org/en/docs/guides/nodejs-docker-webapp/](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
+按照文档来（目前用的是 yarn 所以略作修改）
+```
+touch Dockerfile
+```
+```
+FROM node:12
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package.json ./
+COPY yarn.lock ./
+
+RUN yarn
+# If you are building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
+COPY . .
+
+EXPOSE 3000
+CMD [ "yarn", "start" ]
+```
+```
+touch .dockerignore
+```
+```
+node_modules
+*.log
+```
+#### build：
+```
+// docker build -t <your username>/node-web-app .
+docker build -t zch/node-web-app .
+```
+#### run:
+```
+// docker run -p 49160:8080 -d <your username>/node-web-app
+docker run -p 3000:3000 -d zch/node-web-app
+```
+
+## 连接服务器
+- 上 aliyun.com 购买一台服务器，推荐镜像用 Ubuntu 18.04 64位的系统，教程最多
+```
+ssh root@服务器ip
+```
+> 如果记不住 ip 地址，可以在第一次输入以后，修改本地的 hosts 文件，增加如下
+> 服务器ip 你想要的别名：如 dev
+> 下次就可以 ssh root@dev 即可
+
+#### 上传 ssh pub key
+因为一直在用 github 的 ssh key
+所以就不用再次新建了（一台机器一个 key 就够了），直接上传
+```
+ssh-copy-id ssh root@服务器ip
+```
+以后再次连接就不用在输入密码了
+
+#### 修改密码（可选）
+```
+passwd root
+```
+
+#### 如果想让别人登录你的服务器，两种方式
+- 告诉他你服务器的密码
+- 在你的服务器中加入他的 ssh 公钥
+- vi ~/.ssh/authorized_keys
+
+#### 分配用户
+- 最好不要每次都用 root 登录服务器，因为权限太大了
+- 我们创建一个 blog 用户
+- adduser blog
+- 输入密码以后，一直回车
+- 切换用户 su - blog
+- 以后就是用 ssh blog@dev 登录
+
+#### 在服务器上安装 docker
+- 用 root 进入服务器
+- [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
+- 按教程来
+
+#### 给 blog 用户分配 docker 权限
+- 查看所有权限：cat /etc/group
+- 添加进组：usermod -a -G docker blog
+- 验证：docker run hello-world
