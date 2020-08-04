@@ -10,6 +10,7 @@ COPY package.json ./
 COPY yarn.lock ./
 
 RUN yarn
+RUN yarn build
 # If you are building your code for production
 # RUN npm ci --only=production
 
@@ -17,5 +18,4 @@ RUN yarn
 COPY . .
 
 EXPOSE 3000
-CMD [ "yarn", "build" ]
 CMD [ "yarn", "start" ]
