@@ -94,6 +94,7 @@ docker build -t zch/node-web-app .
 ```
 // docker run -p 49160:8080 -d <your username>/node-web-app
 docker run -p 3000:3000 -d zch/node-web-app
+// docker run --nodework=host -p 3000:3000 -d zch/node-web-app // 服务器
 ```
 
 ## 连接服务器
