@@ -14,6 +14,7 @@ const promise = (async function () {
   // @ts-ignore
   return createConnection({
     ...config,
+    host: process.env.NODE.ENV === 'production' ? 'localhost' : config.host
     entities: [Post, User, Comment]
   })
 })()
