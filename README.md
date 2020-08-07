@@ -110,6 +110,7 @@ ssh root@服务器ip
 因为一直在用 github 的 ssh key
 所以就不用再次新建了（一台机器一个 key 就够了），直接上传
 ```
+// ssh-copy-id -i ~/.ssh/id_rsa.pub root@服务器ip
 ssh-copy-id ssh root@服务器ip
 ```
 以后再次连接就不用在输入密码了
@@ -123,6 +124,7 @@ passwd root
 - 告诉他你服务器的密码
 - 在你的服务器中加入他的 ssh 公钥
 - vi ~/.ssh/authorized_keys
+
 
 #### 分配用户
 - 最好不要每次都用 root 登录服务器，因为权限太大了
