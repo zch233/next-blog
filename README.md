@@ -143,3 +143,9 @@ passwd root
 - 查看所有权限：cat /etc/group
 - 添加进组：usermod -a -G docker blog
 - 验证：docker run hello-world
+
+## 安装 docker nginx
+```
+docker run --name="nginx1" --net="host" -v /home/blog/nginx.conf:/etc/nginx/conf.d/default.conf -d nginx:1.19.1
+docker exec -it nginx1 service nginx reload // 重启 nginx 服务
+```
