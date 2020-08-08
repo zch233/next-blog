@@ -2,8 +2,10 @@ import {NextPage} from 'next';
 import React from 'react';
 import {userForm} from '../hooks/userForm';
 import axios from 'axios';
+import {useRouter} from 'next/router';
 
 const SignUp: NextPage = () => {
+  const router = useRouter()
   const {form} = userForm({
     fields: [
       {
@@ -23,9 +25,9 @@ const SignUp: NextPage = () => {
       },
     ],
     initFormData: { username: '', password: '', passwordConfirmation: '' },
-    submit: (formData) => axios.post('/api/v1/createUser', formData).then(() => {
+    submit: (formData) => axios.post('/api/v1/createUser', formData).then(async () => {
       window.alert('注册成功')
-      window.location.href = '/sign_in'
+      await router.push('/sign_in')
     })
   })
   return (

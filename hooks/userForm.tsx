@@ -1,5 +1,6 @@
 import React, {ReactChild, useCallback, useState} from 'react';
 import {AxiosResponse} from 'axios';
+import {useRouter} from 'next/router';
 
 interface Field<T> {
   label: string;
@@ -17,6 +18,7 @@ interface UserFormOptions<T> {
 const Errors: React.FC<{ errors: string[] }> = (props) => <div>{props.errors.join('，')}</div>;
 
 export function userForm<T> (userFormOptions: UserFormOptions<T>) {
+  const router = useRouter()
   const {initFormData, fields, submitContent, submit} = userFormOptions;
   const [formData, setFormData] = useState(initFormData);
   const [errors, setErrors] = useState(() => {
@@ -26,13 +28,14 @@ export function userForm<T> (userFormOptions: UserFormOptions<T>) {
   });
   const onSubmit = useCallback((e) => {
     e.preventDefault();
-    submit(formData).catch((err) => {
+    submit(formData).catch(async (err) => {
       const response: AxiosResponse = err.response
+      console.log(err);
       if (response.status === 422) {
         setErrors(response.data);
       } else if (response.status === 401) {
         window.alert('请登录')
-        window.location.href = `/sign_in?redirect=${encodeURIComponent(window.location.pathname)}`
+        await router.push(`/sign_in?redirect=${encodeURIComponent(window.location.pathname)}`)
       }
     });
   }, [formData]);

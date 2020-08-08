@@ -2,8 +2,10 @@ import React from 'react';
 import {NextPage} from 'next';
 import {userForm} from '../../hooks/userForm';
 import axios from 'axios';
+import {useRouter} from 'next/router';
 
 const NewPost: NextPage = () => {
+  const router = useRouter()
   const {form} = userForm({
     fields: [
       {
@@ -18,9 +20,9 @@ const NewPost: NextPage = () => {
       },
     ],
     initFormData: {title: '', content: ''},
-    submit: (formData) => axios.post('/api/v1/posts', formData).then(() => {
+    submit: (formData) => axios.post('/api/v1/posts', formData).then(async () => {
       window.alert('创建成功')
-      window.location.href = '/posts'
+      await router.push('/posts')
     }),
   });
   return (
