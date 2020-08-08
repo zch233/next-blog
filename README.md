@@ -152,6 +152,11 @@ docker exec -it nginx1 service nginx reload // 重启 nginx 服务
 
 ## 一键部署
 #### 本地脚本在远程服务器上执行
+```
 ssh root@服务器ip 'bash -s' < local_script.sh
+```
 #### 本地执行远程脚本
-ssh root@服务器ip server.sh
+```
+// 执行本地脚前最好加上 chmod +x serve.sh ，不加也可以
+ssh root@服务器ip 'sh server.sh'
+```

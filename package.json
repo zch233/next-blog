@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:babel": "concurrently \"next dev\" \"babel -w ./src --out-dir dist --extensions .ts,.tsx\"",
+    "dev:babel": "concurrently \"next dev\" \"yarn compile:watch\"",
+    "compile:watch": "babel -w ./src --out-dir dist --extensions .ts,.tsx",
+    "compile": "babel ./src --out-dir dist --extensions .ts,.tsx",
     "build": "next build",
     "start": "next start",
     "build:typeorm": "babel -w ./src --out-dir dist --extensions .ts,.tsx",
