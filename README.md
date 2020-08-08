@@ -149,3 +149,9 @@ passwd root
 docker run --name="nginx1" --net="host" -v /home/blog/nginx.conf:/etc/nginx/conf.d/default.conf -d nginx:1.19.1
 docker exec -it nginx1 service nginx reload // 重启 nginx 服务
 ```
+
+## 一键部署
+#### 本地脚本在远程服务器上执行
+ssh root@服务器ip 'bash -s' < local_script.sh
+#### 本地执行远程脚本
+ssh root@服务器ip server.sh
