@@ -13,7 +13,8 @@
     "migration:create": "typeorm migration:create",
     "migration:run": "typeorm migration:run",
     "migration:revert": "typeorm migration:revert",
-    "entity:create": "typeorm entity:create"
+    "entity:create": "typeorm entity:create",
+    "deploy": "git push && ssh blog@dev 'bash -s' < bin/deploy.sh"
   },
   "dependencies": {
     "axios": "^0.19.2",

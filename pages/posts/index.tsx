@@ -17,7 +17,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
   const {pager} = userPager(pageOption);
   return (
     <div className="container">
-      <h1>文章列表 <Link href="/posts/new"><a>开始创作</a></Link></h1>
+      <h1>文章列表-<Link href="/posts/new"><a>开始创作</a></Link></h1>
       {posts.map(post => <p key={post.id}><Link href={'/posts/[id]'}
                                                 as={`/posts/${post.id}`}><a>{post.id}---{post.title}({post.authorId})</a></Link>
       </p>)}
