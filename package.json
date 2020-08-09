@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "start:psql1": "docker restart psql1 && yarn dev:babel",
+    "dev:psql1": "docker restart psql1 && yarn dev:babel",
     "dev:babel": "concurrently \"next dev\" \"yarn compile:watch\"",
     "compile:watch": "babel -w ./src --out-dir dist --extensions .ts,.tsx",
     "compile": "babel ./src --out-dir dist --extensions .ts,.tsx",
