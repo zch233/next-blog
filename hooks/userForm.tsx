@@ -30,7 +30,6 @@ export function userForm<T> (userFormOptions: UserFormOptions<T>) {
     e.preventDefault();
     submit(formData).catch(async (err) => {
       const response: AxiosResponse = err.response
-      console.log(err);
       if (response.status === 422) {
         setErrors(response.data);
       } else if (response.status === 401) {
