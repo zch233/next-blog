@@ -1,5 +1,5 @@
 cd /home/blog/ &&
-mkdir data-blog;
+mkdir blog-data;
 docker kill psql1;
 docker rm psql1;
 docker run --name="psql1" --net="host" -v "/home/blog/blog-data":/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2 &&
