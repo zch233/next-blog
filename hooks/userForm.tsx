@@ -18,7 +18,8 @@ interface UserFormOptions<T> {
 const Errors: React.FC<{ errors: string[] }> = (props) => <div>{props.errors.join('，')}</div>;
 
 export function userForm<T> (userFormOptions: UserFormOptions<T>) {
-  const router = useRouter()
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const {initFormData, fields, submitContent, submit} = userFormOptions;
   const [formData, setFormData] = useState(initFormData);
   const [errors, setErrors] = useState(() => {
@@ -28,20 +29,21 @@ export function userForm<T> (userFormOptions: UserFormOptions<T>) {
   });
   const onSubmit = useCallback((e) => {
     e.preventDefault();
-    submit(formData).catch(async (err) => {
-      const response: AxiosResponse = err.response
+    setLoading(true)
+    submit(formData).finally(() => setLoading(false)).catch(async (err) => {
+      const response: AxiosResponse = err.response;
       if (response.status === 422) {
         setErrors(response.data);
       } else if (response.status === 401) {
-        window.alert('请登录')
-        await router.push(`/sign_in?redirect=${encodeURIComponent(window.location.pathname)}`)
+        window.alert('请登录');
+        await router.push(`/sign_in?redirect=${encodeURIComponent(window.location.pathname)}`);
       }
     });
   }, [formData]);
   const onChange = useCallback((e, type: keyof T) => {
     setFormData({...formData, [type]: e.target.value});
   }, [formData]);
-  const form = (
+  const form = loading ? <h1>Loading...</h1> : (
     <form onSubmit={onSubmit}>
       {fields.map(field => (
         <div key={field.key.toString()}>
