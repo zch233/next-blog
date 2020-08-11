@@ -18,6 +18,19 @@ interface Props {
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
+  .author {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.84);
+    font-size: 15px;
+    margin: 8px 0;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .time {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 15px;
+  }
 `
 const PageHeader = styled.header`
   display: flex;
@@ -59,6 +72,7 @@ const UserHeaderWrapper = styled.div`
 const CategoryWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin: 10px 0 20px 0;
 `
 const Category = styled.ul`
   list-style: none;
@@ -70,6 +84,50 @@ const Category = styled.ul`
     transition: all .3s;
     &.active {
       color: rgba(0,0,0,.84);
+    }
+  }
+`
+const LatestPostsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+const LeftSection = styled.section`
+  width: 50%;
+  border: 1px solid #ddd;
+  .imageWrapper {
+    background-color: #ddd;
+    height: 150px;
+    overflow: hidden;
+  }
+  .title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    margin: 17px 0 40px 0;
+  }
+`
+const RightSection = styled.section`
+  width: 49%;
+  border: 1px solid #ddd;
+  .articleItem {
+    display: flex;
+    .imageWrapper {
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      margin-right: 20px;
+      background-color: #ddd;
+    }
+    .postInfo {
+      flex: 1;
+      display: inline-flex;
+      flex-direction: column;
+      .title {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 20px;
+        margin-bottom: auto;
+      }
     }
   }
 `
@@ -103,7 +161,24 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
         </Category>
         <div>右</div>
       </CategoryWrapper>
-      <h1>文章列表-</h1>
+      <LatestPostsWrapper>
+        <LeftSection>
+          <div className={'imageWrapper'}></div>
+          <p className={'title'}>第一篇文章</p>
+          <p className={'author'}>一只会飞的猪</p>
+          <time className={'time'}>2019-10-12</time>
+        </LeftSection>
+        <RightSection>
+          <article className={'articleItem'}>
+            <div className={'imageWrapper'}></div>
+            <div className={'postInfo'}>
+              <p className={'title'}>第二篇文章</p>
+              <p className={'author'}>一只会飞的猪</p>
+              <time className={'time'}>2019-10-12</time>
+            </div>
+          </article>
+        </RightSection>
+      </LatestPostsWrapper>
       {posts.map(post => <p key={post.id}><Link href={'/posts/[id]'}
                                                 as={`/posts/${post.id}`}><a>{post.id}---{post.title}({post.authorId})</a></Link>
       </p>)}
