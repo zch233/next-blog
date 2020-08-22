@@ -214,7 +214,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
         </UserInfo>
       </PageHeader>
       <CategoryWrapper>
-        <div>左</div>
+        <div>&lt;</div>
         <Category>
           <li className={'item'}>日记</li>
           <li className={'item'}>日记</li>
@@ -223,7 +223,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
           <li className={'item'}>日记</li>
           <li className={'item'}>日记</li>
         </Category>
-        <div>右</div>
+        <div>&gt;</div>
       </CategoryWrapper>
       <LatestPostsWrapper>
         <LeftSection>
