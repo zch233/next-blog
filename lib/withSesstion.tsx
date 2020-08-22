@@ -5,7 +5,7 @@ export function withSession(handler: NextApiHandler | GetServerSideProps) {
   return withIronSession(handler, {
     password: process.env.SECRET_COOKIE_PASSWORD,
     cookieName: 'blog',
-    ttl: 1,
+    ttl: 3600 * 24,
     cookieOptions: {
       secure: false,
       httpOnly: true,
