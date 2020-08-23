@@ -148,6 +148,8 @@ passwd root
 ```
 docker run --name="nginx1" --net="host" -v /home/blog/nginx.conf:/etc/nginx/conf.d/default.conf -d nginx:1.19.1
 docker exec -it nginx1 service nginx reload // 重启 nginx 服务
+// nginx -t // 验证配置
+// nginx -s reload // 重启配置
 ```
 
 ## 一键部署
