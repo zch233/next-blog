@@ -5,6 +5,12 @@ export const Container = styled.div`
   min-width: 900px;
   margin: 0 auto;
   padding: 0 10px;
+  .imageWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {color:#aaa;font-size:30px;}
+  }
   .title {
     display: inline-block;
     font-weight: 600;

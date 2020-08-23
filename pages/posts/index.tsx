@@ -17,6 +17,7 @@ import {
   RightSection, UserHeaderWrapper,
   UserInfo,
 } from './indexStyles';
+import ALiIcon from '../../components/ALiIcon';
 
 interface Props {
   posts: Post[];
@@ -47,7 +48,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
         </UserInfo>
       </PageHeader>
       <CategoryWrapper>
-        <div>&lt;</div>
+        <div><ALiIcon icon={'left'} /></div>
         <Category>
           <li className={'item'}>分类一</li>
           <li className={'item'}>分类二</li>
@@ -56,13 +57,15 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
           <li className={'item'}>分类五</li>
           <li className={'item'}>分类6</li>
         </Category>
-        <div>&gt;</div>
+        <div><ALiIcon icon={'right'} /></div>
       </CategoryWrapper>
       <LatestPostsWrapper>
         <LeftSection>
           <Link href={'/posts/[id]'} as={`/posts/${firstPost.id}`}>
             <a>
-              <div className={'imageWrapper'}></div>
+              <div className={'imageWrapper'}>
+                <ALiIcon icon={'img'} />
+              </div>
               <cite className={'title'}>{firstPost.title}</cite>
               <p className={'content'}>{firstPost.content.substr(0, 100)}...</p>
             </a>
@@ -74,7 +77,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
           {subPosts.map(post => (
             <article key={post.id} className={'articleItem'}>
               <Link href={'/posts/[id]'} as={`/posts/${post.id}`}>
-                <a><div className={'imageWrapper'}></div></a>
+                <a><div className={'imageWrapper'}><ALiIcon icon={'img'} /></div></a>
               </Link>
               <div className={'postInfo'}>
                 <Link href={'/posts/[id]'} as={`/posts/${post.id}`}>
@@ -105,7 +108,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
                 <time className={'time'}>{new Date(post.createdAt).toDateString()}</time>
               </div>
               <Link href={'/posts/[id]'} as={`/posts/${post.id}`}>
-                <a><div className={'imageWrapper'}></div></a>
+                <a><div className={'imageWrapper'}><ALiIcon icon={'img'} /></div></a>
               </Link>
             </li>
           ))}
