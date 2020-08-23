@@ -1,5 +1,5 @@
 import React, {ReactChild, useCallback, useState} from 'react';
-import {AxiosResponse} from 'axios';
+import axios, {AxiosError, AxiosResponse} from 'axios';
 import {useRouter} from 'next/router';
 
 interface Field<T> {
@@ -12,7 +12,9 @@ interface UserFormOptions<T> {
   initFormData: T,
   fields: Field<T>[]; // keyof
   submitContent?: ReactChild;
-  submit: (formData: T) => Promise<void>
+  url: string;
+  methods?: 'get' | 'post';
+  afterSubmit: (err: AxiosError, data?: AxiosResponse) => Promise<void>;
 }
 
 const Errors: React.FC<{ errors: string[] }> = (props) => <div>{props.errors.join('，')}</div>;
@@ -20,7 +22,7 @@ const Errors: React.FC<{ errors: string[] }> = (props) => <div>{props.errors.joi
 export function userForm<T> (userFormOptions: UserFormOptions<T>) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const {initFormData, fields, submitContent, submit} = userFormOptions;
+  const {initFormData, fields, submitContent, methods, url, afterSubmit} = userFormOptions;
   const [formData, setFormData] = useState(initFormData);
   const [errors, setErrors] = useState(() => {
     const e: { [k in keyof T]?: string[] } = {};
@@ -30,8 +32,9 @@ export function userForm<T> (userFormOptions: UserFormOptions<T>) {
   const onSubmit = useCallback((e) => {
     e.preventDefault();
     setLoading(true)
-    submit(formData).finally(() => setLoading(false)).catch(async (err) => {
-      const response: AxiosResponse = err.response;
+    axios.post(url, formData).then(data => afterSubmit(null, data)).finally(() => setLoading(false)).catch(async (err: AxiosError) => {
+      await afterSubmit(err)
+      const response = err.response;
       if (response.status === 422) {
         setErrors(response.data);
       } else if (response.status === 401) {

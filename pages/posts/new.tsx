@@ -1,12 +1,11 @@
 import React from 'react';
-import {NextPage} from 'next';
-import {userForm} from '../../hooks/userForm';
-import axios from 'axios';
-import {useRouter} from 'next/router';
+import { NextPage } from 'next';
+import { userForm } from '../../hooks/userForm';
+import { useRouter } from 'next/router';
 
 const NewPost: NextPage = () => {
-  const router = useRouter()
-  const {form} = userForm({
+  const router = useRouter();
+  const { form } = userForm({
     fields: [
       {
         label: '标题',
@@ -19,16 +18,18 @@ const NewPost: NextPage = () => {
         inputType: 'textarea',
       },
     ],
-    initFormData: {title: '', content: ''},
-    submit: (formData) => axios.post('/api/v1/posts', formData).then(async () => {
-      window.alert('创建成功')
-      await router.push('/posts')
-    }),
+    initFormData: { title: '', content: '' },
+    url: '/api/v1/posts',
+    afterSubmit: async err => {
+      if (err) return;
+      window.alert('创建成功!');
+      await router.push('/posts');
+    },
   });
   return (
     <div>
       <h1>创作：</h1>
-      {form}
+      { form }
     </div>
   );
 };
