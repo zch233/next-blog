@@ -96,7 +96,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
       <PageMain>
         <ArticleList>
           {restPosts.map(post => (
-            <li className={'articleItem'}>
+            <li key={post.id} className={'articleItem'}>
               <div className={'articleItem-info'}>
                 <Link href={'/posts/[id]'} as={`/posts/${post.id}`}>
                   <a>
@@ -116,7 +116,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
         <PopularList>
           <h4>最近一周最热</h4>
           {posts.slice(0, 5).map((post, index) => (
-            <div className={'popularItem'}>
+            <div key={post.id} className={'popularItem'}>
               <em>0{index + 1}</em>
               <div className={'popularItem-info'}>
                 <Link href={'/posts/[id]'} as={`/posts/${post.id}`}>
