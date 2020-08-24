@@ -18,6 +18,7 @@ import {
   UserInfo,
 } from './indexStyles';
 import ALiIcon from '../../components/ALiIcon';
+import { User } from '../../src/entity/User';
 
 interface Props {
   posts: Post[];
@@ -140,7 +141,17 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const connection = await getDatabaseConnection();
   const size = parseInt((context.query.size || 10).toString());
   const page = parseInt((context.query.page || 1).toString());
-  const [posts, total] = await connection.manager.findAndCount('Post', {take: size, skip: (page - 1) * size});
+  const [posts, total] = await connection.manager.findAndCount('Post', {
+    take: size,
+    skip: (page - 1) * size,
+    join: {
+      alias: 'post',
+      leftJoin: {
+        author: 'post.author',
+      },
+    }
+  });
+  console.log(posts);
   return {
     props: {
       posts: JSON.parse(JSON.stringify(posts)),
