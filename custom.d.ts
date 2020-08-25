@@ -4,6 +4,8 @@ type Post = {
   title: string;
   content?: string;
   htmlContent?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 declare module '*.png' {
