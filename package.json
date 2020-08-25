@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "github-markdown-css": "^4.0.0",
     "gray-matter": "^4.0.2",
     "marked": "^1.1.0",
     "next": "9.4.4",

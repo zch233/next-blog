@@ -1,4 +1,5 @@
 import '../styles/global.scss'
+import 'github-markdown-css'
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 import React from "react";
