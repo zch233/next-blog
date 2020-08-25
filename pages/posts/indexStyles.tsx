@@ -21,6 +21,7 @@ export const Container = styled.div`
     color: rgba(0, 0, 0, 0.84);
     font-size: 15px;
     margin: 8px 0;
+    display: inline-block;
     &:hover {
       text-decoration: underline;
     }

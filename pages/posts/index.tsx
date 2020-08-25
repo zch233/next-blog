@@ -1,7 +1,6 @@
 import {GetServerSideProps, NextPage} from 'next';
 import {getDatabaseConnection} from '../../lib/getDatabaseConnection';
 import React from 'react';
-import {Post} from '../../src/entity/Post';
 import Link from 'next/link';
 import {userPager} from '../../hooks/usePager';
 import headerImage from '../../assets/header.png';
@@ -18,7 +17,6 @@ import {
   UserInfo,
 } from './indexStyles';
 import ALiIcon from '../../components/ALiIcon';
-import { User } from '../../src/entity/User';
 
 interface Props {
   posts: Post[];
@@ -71,7 +69,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
               <p className={'content'}>{firstPost.content.substr(0, 100)}...</p>
             </a>
           </Link>
-          <p className={'author'}>一只会飞的猪</p>
+          <p><span className={'author'}>一只会飞的猪</span></p>
           <time className={'time'}>{new Date(firstPost.createdAt).toDateString()}</time>
         </LeftSection>
         <RightSection>
@@ -87,7 +85,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
                     <p className={'content'}>{post.content}</p>
                   </a>
                 </Link>
-                <p className={'author'}>一只会飞的猪</p>
+                <p><span className={'author'}>一只会飞的猪</span></p>
                 <time className={'time'}>{new Date(post.createdAt).toDateString()}</time>
               </div>
             </article>
@@ -105,7 +103,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
                     <p className={'content'}>{post.content.substr(0, 150)}...</p>
                   </a>
                 </Link>
-                <p className={'author'}>作者</p>
+                <p><span className={'author'}>作者</span></p>
                 <time className={'time'}>{new Date(post.createdAt).toDateString()}</time>
               </div>
               <Link href={'/posts/[id]'} as={`/posts/${post.id}`}>
@@ -123,7 +121,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
                 <Link href={'/posts/[id]'} as={`/posts/${post.id}`}>
                   <a><cite className={'title'}>{post.title}</cite></a>
                 </Link>
-                <p className={'author'}>作者</p>
+                <p><span className={'author'}></span>作者</p>
                 <time className={'time'}>{new Date(post.createdAt).toDateString()}</time>
               </div>
             </div>
