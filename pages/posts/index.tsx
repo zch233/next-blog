@@ -121,7 +121,7 @@ const PostsIndex: NextPage<Props> = ({posts, ...pageOption}) => {
                 <Link href={'/posts/[id]'} as={`/posts/${post.id}`}>
                   <a><cite className={'title'}>{post.title}</cite></a>
                 </Link>
-                <p><span className={'author'}></span>作者</p>
+                <p><span className={'author'}>作者</span></p>
                 <time className={'time'}>{new Date(post.createdAt).toDateString()}</time>
               </div>
             </div>
