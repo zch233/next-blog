@@ -50,6 +50,6 @@ export class Post {
     return !!Object.values(this.errors).find(v => v.length > 0);
   }
   toJSON () {
-    return {id: this.id, title: this.title, content: this.content, createAt: this.createdAt, updateAt: this.updatedAt}
+    return {id: this.id, title: this.title, content: this.content, createdAt: this.createdAt, updatedAt: this.updatedAt, author: this.author}
   }
 }
