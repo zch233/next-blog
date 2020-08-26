@@ -1,11 +1,19 @@
+type User = {
+  id: number;
+  username: string;
+  createdAt?: string;
+  updatedAt?: string;
+
+}
 type Post = {
-  id: string;
+  id: number;
   date: string;
   title: string;
   content?: string;
   htmlContent?: string;
   createdAt?: string;
   updatedAt?: string;
+  author: User
 }
 
 declare module '*.png' {

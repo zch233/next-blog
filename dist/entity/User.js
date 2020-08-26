@@ -129,7 +129,9 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.PrimaryGe
     value: function toJSON() {
       return {
         id: this.id,
-        username: this.username
+        username: this.username,
+        createdAt: this.createdAt,
+        updatedAt: this.updatedAt
       };
     }
   }, {

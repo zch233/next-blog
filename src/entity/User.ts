@@ -75,7 +75,7 @@ export class User {
   }
 
   toJSON () {
-    return { id: this.id, username: this.username }
+    return { id: this.id, username: this.username, createdAt: this.createdAt, updatedAt: this.updatedAt }
   }
 
 

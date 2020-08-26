@@ -15,6 +15,10 @@ const Wrapper = styled.main`
   padding: 40px 0;
   h1 {
     margin-bottom: 10px;
+    .author {
+      padding-left: 1em;
+      font-size: 16px;
+    }
   }
   .time {
     color: #aaa;
@@ -29,8 +33,8 @@ const Wrapper = styled.main`
 const PostsDetail:NextPage<Props> = ({post}) => {
   return (
     <Wrapper>
-      <h1>{post.title}{post.author}</h1>
-      <p className={'time'}>{new Date(post.updatedAt).toLocaleString()}</p>
+      <h1>{post.title}<span className={'author'}>by：{post.author.username}</span></h1>
+      <p className={'time'}>{new Date(post.updatedAt).toDateString()}</p>
       <article className="markdown-body" dangerouslySetInnerHTML={{__html: marked(post.content)}} />
       <Link href="/posts"><a className={'return'}>返回文章列表</a></Link>
     </Wrapper>
@@ -47,12 +51,11 @@ export const getServerSideProps: GetServerSideProps<any, {id:string}> = async co
     },
     join: {
       alias: 'post',
-      leftJoin: {
+      leftJoinAndSelect: {
         author: 'post.author'
       }
     }
   })
-  console.log(post);
   return {
     props: {
       post: JSON.parse(JSON.stringify(post))
