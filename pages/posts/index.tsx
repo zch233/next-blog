@@ -17,6 +17,7 @@ import {
   UserInfo,
 } from './indexStyles';
 import ALiIcon from '../../components/ALiIcon';
+import { getFullDate } from '../../utils/date';
 
 interface Props {
   posts: Post[];
@@ -71,7 +72,7 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
           </Link>
           <p><Link href="/posts/user/[id]" as={ `/posts/user/${ firstPost.author.id }` }><a><span
             className={ 'author' }>{ firstPost.author.username }</span></a></Link></p>
-          <time className={ 'time' }>{ new Date(firstPost.createdAt).toDateString() }</time>
+          <time className={ 'time' }>{ getFullDate(firstPost.createdAt) }</time>
         </LeftSection>
         <RightSection>
           { subPosts.map(post => (
@@ -89,7 +90,7 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
                   </a>
                 </Link>
                 <p><span className={ 'author' }>{ post.author.username }</span></p>
-                <time className={ 'time' }>{ new Date(post.createdAt).toDateString() }</time>
+                <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
             </article>
           )) }
@@ -108,7 +109,7 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
                 </Link>
                 <p><Link href="/posts/user/[id]" as={ `/posts/user/${ post.author.id }` }><a><span
                   className={ 'author' }>{ post.author.username }</span></a></Link></p>
-                <time className={ 'time' }>{ new Date(post.createdAt).toDateString() }</time>
+                <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
               <Link href={ '/posts/[id]' } as={ `/posts/${ post.id }` }>
                 <a>
@@ -129,7 +130,7 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
                 </Link>
                 <p><Link href="/posts/user/[id]" as={ `/posts/user/${ post.author.id }` }><a><span
                   className={ 'author' }>{ post.author.username }</span></a></Link></p>
-                <time className={ 'time' }>{ new Date(post.createdAt).toDateString() }</time>
+                <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
             </div>
           )) }
