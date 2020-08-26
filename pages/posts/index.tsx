@@ -69,7 +69,8 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
               <p className={ 'content' }>{ firstPost.content.substr(0, 100) }...</p>
             </a>
           </Link>
-          <p><span className={ 'author' }>{ firstPost.author.username }</span></p>
+          <p><Link href="/posts/user/[id]" as={ `/posts/user/${ firstPost.author.id }` }><a><span
+            className={ 'author' }>{ firstPost.author.username }</span></a></Link></p>
           <time className={ 'time' }>{ new Date(firstPost.createdAt).toDateString() }</time>
         </LeftSection>
         <RightSection>
@@ -105,7 +106,8 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
                     <p className={ 'content' }>{ post.content.substr(0, 150) }...</p>
                   </a>
                 </Link>
-                <p><span className={ 'author' }>{ post.author.username }</span></p>
+                <p><Link href="/posts/user/[id]" as={ `/posts/user/${ post.author.id }` }><a><span
+                  className={ 'author' }>{ post.author.username }</span></a></Link></p>
                 <time className={ 'time' }>{ new Date(post.createdAt).toDateString() }</time>
               </div>
               <Link href={ '/posts/[id]' } as={ `/posts/${ post.id }` }>
@@ -125,7 +127,8 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
                 <Link href={ '/posts/[id]' } as={ `/posts/${ post.id }` }>
                   <a><cite className={ 'title' }>{ post.title }</cite></a>
                 </Link>
-                <p><span className={ 'author' }>{ post.author.username }</span></p>
+                <p><Link href="/posts/user/[id]" as={ `/posts/user/${ post.author.id }` }><a><span
+                  className={ 'author' }>{ post.author.username }</span></a></Link></p>
                 <time className={ 'time' }>{ new Date(post.createdAt).toDateString() }</time>
               </div>
             </div>
