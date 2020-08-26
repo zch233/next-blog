@@ -92,8 +92,9 @@ var Post = (_dec = (0, _typeorm.Entity)('posts'), _dec2 = (0, _typeorm.PrimaryGe
         id: this.id,
         title: this.title,
         content: this.content,
-        createAt: this.createdAt,
-        updateAt: this.updatedAt
+        createdAt: this.createdAt,
+        updatedAt: this.updatedAt,
+        author: this.author
       };
     }
   }]);
