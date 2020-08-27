@@ -3,22 +3,20 @@ import { getDatabaseConnection } from '../../lib/getDatabaseConnection';
 import React from 'react';
 import Link from 'next/link';
 import { userPager } from '../../hooks/usePager';
-import headerImage from '../../assets/header.png';
-import logoImage from '../../assets/logo.png';
 import {
   ArticleList,
   Category,
   CategoryWrapper, Container,
-  ImageWrapper, LatestPostsWrapper,
+  LatestPostsWrapper,
   LeftSection,
-  PageHeader, PageMain,
+  PageMain,
   PopularList,
   RightSection, UserHeaderWrapper,
-  UserInfo,
 } from './indexStyles';
 import ALiIcon from '../../components/ALiIcon';
 import { getFullDate } from '../../utils/date';
 import { withSession } from '../../lib/withSesstion';
+import PageHeader from '../../components/PageHeader';
 
 interface Props {
   posts: Post[];
@@ -36,21 +34,7 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
   const restPosts = otherPosts.slice(3);
   return (
     <Container>
-      <PageHeader>
-        <ImageWrapper>
-          <img width="100%" src={ headerImage } alt=""/>
-        </ImageWrapper>
-        <UserInfo>
-          <ALiIcon icon={'search'} />
-          <ALiIcon icon={'message'} />
-          {user ? <Link href="/user/[id]" as={`/user/${user.id}`}><a className={'user'}>
-            <UserHeaderWrapper>
-              <img width="130%" src={ logoImage } alt=""/>
-            </UserHeaderWrapper>
-            <span className={'username'}>{user.username}</span></a></Link> : <Link href="/sign_in"><a>请登录</a></Link>}
-          <Link href="/posts/new"><a className={'newPosts'}>写文章</a></Link>
-        </UserInfo>
-      </PageHeader>
+      <PageHeader user={user} />
       <CategoryWrapper>
         <div><ALiIcon icon={ 'left' }/></div>
         <Category>
