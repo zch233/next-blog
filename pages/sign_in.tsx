@@ -32,7 +32,7 @@ const SignIn: NextPage<{ user: User }> = (props) => {
   });
   return (
     <>
-      { props.user?.username }
+      { props.user && `${props.user.username}，您已登录` }
       <h1>登陆</h1>
       { form }
       <input onClick={ () => router.push('/sign_up') } type="button" value="注册"/>
@@ -43,10 +43,10 @@ export default SignIn;
 
 export const getServerSideProps: GetServerSideProps = withSession(async (context: GetServerSidePropsContext) => {
   // @ts-ignore
-  const user = context.req.session.get('user');
+  const user = context.req.session.get('user') || '';
   return {
     props: {
-      user: JSON.parse(JSON.stringify(user || {})),
+      user,
     },
   };
 });

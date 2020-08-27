@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
 import { getDatabaseConnection } from '../../lib/getDatabaseConnection';
 import React from 'react';
 import Link from 'next/link';
@@ -18,6 +18,7 @@ import {
 } from './indexStyles';
 import ALiIcon from '../../components/ALiIcon';
 import { getFullDate } from '../../utils/date';
+import { withSession } from '../../lib/withSesstion';
 
 interface Props {
   posts: Post[];
@@ -25,9 +26,10 @@ interface Props {
   page: number;
   totalPage: number;
   size: number;
+  user: User;
 }
 
-const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
+const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
   const { pager } = userPager(pageOption);
   const [firstPost, ...otherPosts] = posts;
   const subPosts = otherPosts.slice(0, 3);
@@ -39,12 +41,14 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
           <img width="100%" src={ headerImage } alt=""/>
         </ImageWrapper>
         <UserInfo>
-          <span>搜索</span>
-          <span>消息</span>
-          <UserHeaderWrapper>
-            <img width="130%" src={ logoImage } alt=""/>
-          </UserHeaderWrapper>
-          <Link href="/posts/new"><a>写文章</a></Link>
+          <ALiIcon icon={'search'} />
+          <ALiIcon icon={'message'} />
+          {user ? <Link href="/user/[id]" as={`/user/${user.id}`}><a className={'user'}>
+            <UserHeaderWrapper>
+              <img width="130%" src={ logoImage } alt=""/>
+            </UserHeaderWrapper>
+            <span className={'username'}>{user.username}</span></a></Link> : <Link href="/sign_in"><a>请登录</a></Link>}
+          <Link href="/posts/new"><a className={'newPosts'}>写文章</a></Link>
         </UserInfo>
       </PageHeader>
       <CategoryWrapper>
@@ -70,7 +74,7 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
               <p className={ 'content' }>{ firstPost.content.substr(0, 100) }...</p>
             </a>
           </Link>
-          <p><Link href="/posts/user/[id]" as={ `/posts/user/${ firstPost.author.id }` }><a><span
+          <p><Link href="/user/[id]" as={ `/user/${ firstPost.author.id }` }><a><span
             className={ 'author' }>{ firstPost.author.username }</span></a></Link></p>
           <time className={ 'time' }>{ getFullDate(firstPost.createdAt) }</time>
         </LeftSection>
@@ -89,7 +93,7 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
                     <p className={ 'content' }>{ post.content }</p>
                   </a>
                 </Link>
-                <p><Link href="/posts/user/[id]" as={ `/posts/user/${ post.author.id }` }><a><span className={ 'author' }>{ post.author.username }</span></a></Link></p>
+                <p><Link href="/user/[id]" as={ `/user/${ post.author.id }` }><a><span className={ 'author' }>{ post.author.username }</span></a></Link></p>
                 <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
             </article>
@@ -107,7 +111,7 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
                     <p className={ 'content' }>{ post.content.substr(0, 150) }...</p>
                   </a>
                 </Link>
-                <p><Link href="/posts/user/[id]" as={ `/posts/user/${ post.author.id }` }><a><span
+                <p><Link href="/user/[id]" as={ `/user/${ post.author.id }` }><a><span
                   className={ 'author' }>{ post.author.username }</span></a></Link></p>
                 <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
@@ -128,7 +132,7 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
                 <Link href={ '/posts/[id]' } as={ `/posts/${ post.id }` }>
                   <a><cite className={ 'title' }>{ post.title }</cite></a>
                 </Link>
-                <p><Link href="/posts/user/[id]" as={ `/posts/user/${ post.author.id }` }><a><span
+                <p><Link href="/user/[id]" as={ `/user/${ post.author.id }` }><a><span
                   className={ 'author' }>{ post.author.username }</span></a></Link></p>
                 <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
@@ -143,7 +147,7 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
 
 export default PostsIndex;
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = withSession(async (context: GetServerSidePropsContext) => {
   const connection = await getDatabaseConnection();
   const size = parseInt((context.query.size || 10).toString());
   const page = parseInt((context.query.page || 1).toString());
@@ -157,8 +161,11 @@ export const getServerSideProps: GetServerSideProps = async context => {
       },
     },
   });
+  // @ts-ignore
+  const user = context.req.session.get('user') || ''
   return {
     props: {
+      user,
       posts: JSON.parse(JSON.stringify(posts)),
       total,
       page,
@@ -166,4 +173,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
       totalPage: Math.ceil(total / size),
     },
   };
-};
+});

@@ -50,7 +50,7 @@ export const ImageWrapper = styled.div`
 export const UserInfo = styled.div`
   display: flex;
   align-items: center;
-  > a {
+  .newPosts {
     background-color: rgb(212,80,80);
     color: #fff;
     padding: .6em 1.1em;
@@ -61,11 +61,19 @@ export const UserInfo = styled.div`
       background-color: rgb(212,60,60);
     }
   }
+  > svg {
+    color: #999;
+  }
   > * {
-    margin: 0 20px;
+    margin: 0 14px;
     &:last-child {
       margin-right: 0;
     }
+  }
+  .user {
+    display: flex;
+    align-items: center;
+    .username {margin-left: .5em;}
   }
 `
 export const UserHeaderWrapper = styled.div`
