@@ -8,7 +8,7 @@ module.exports = {
           options: {
             name: '[name].[hash].[ext]', // 文件名称
             outputPath: 'static', // 硬盘路径
-            publicPath: '_next/static', // 网站路径
+            publicPath: '/_next/static', // 网站路径
           }
         },
       ],
