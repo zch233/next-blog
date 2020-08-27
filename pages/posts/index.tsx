@@ -89,7 +89,7 @@ const PostsIndex: NextPage<Props> = ({ posts, ...pageOption }) => {
                     <p className={ 'content' }>{ post.content }</p>
                   </a>
                 </Link>
-                <p><span className={ 'author' }>{ post.author.username }</span></p>
+                <p><Link href="/posts/user/[id]" as={ `/posts/user/${ post.author.id }` }><a><span className={ 'author' }>{ post.author.username }</span></a></Link></p>
                 <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
             </article>
