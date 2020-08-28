@@ -6,6 +6,7 @@ import Link from 'next/link';
 import marked from 'marked';
 import styled from 'styled-components';
 import { getFullDate } from '../../utils/date';
+import { useRouter } from 'next/router'
 
 interface Props {
   post: Post
@@ -29,17 +30,20 @@ const Wrapper = styled.main`
   }
   .return {
     color: #c03;
-    display: block;
+    display: inline-block;
     margin-top: 20px;
+    margin-right: 1em;
+    cursor: pointer;
   }
 `;
 const PostsDetail: NextPage<Props> = ({ post }) => {
+  const router = useRouter()
   return (
     <Wrapper>
       <h1>{ post.title }<span className={ 'author' }>by：{ post.author.username }</span></h1>
       <p className={ 'time' }>{ getFullDate(post.createdAt) }</p>
       <article className="markdown-body" dangerouslySetInnerHTML={ { __html: marked(post.content) } }/>
-      <Link href="/posts"><a className={ 'return' }>返回文章列表</a></Link>
+      <Link href="/posts"><a className={ 'return returnList' }>返回文章列表</a></Link><span onClick={() => router.back()} className={ 'return returnBack' }>返回</span>
     </Wrapper>
   );
 };
