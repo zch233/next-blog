@@ -12,6 +12,22 @@ const Container = styled.div`
   min-width: 900px;
   margin: 0 auto;
   padding: 0 10px;
+  .authorTitle {
+    margin: 1em 0;
+  }
+  .posts {
+    margin-bottom: 2em;
+  }
+  .postItem {
+    border-bottom: 1px solid #ddd;
+    padding: .7em 0;
+    font-size: 18px;
+    .content {
+      color: #999;
+      font-size: 14px;
+      margin-top: .4em;
+    }
+  }
 `
 interface Props {
   posts: Post[];
@@ -27,7 +43,10 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
   return (
     <Container>
       <PageHeader user={user} />
-      {posts.map(post => <p key={post.id}>{post.title}</p>)}
+      <h1 className={'authorTitle'}>{posts[0].author.username}的博客</h1>
+      <section className={'posts'}>
+        {posts.map(post => <Link href="/posts/[id]" key={post.id} as={`/posts/${post.id}`}><a><div className={'postItem'}><p className={'postItem-title'}>{post.title}</p><p className={'content'}>{post.content.slice(0, 100)}...</p></div></a></Link>)}
+      </section>
       { pager }
     </Container>
   );
