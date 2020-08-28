@@ -12,7 +12,7 @@ import {
   PageMain,
   PopularList,
   RightSection, UserHeaderWrapper,
-} from './indexStyles';
+} from '../../styles/posts';
 import ALiIcon from '../../components/ALiIcon';
 import { getFullDate } from '../../utils/date';
 import { withSession } from '../../lib/withSesstion';

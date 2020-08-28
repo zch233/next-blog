@@ -7,9 +7,9 @@ const markdownDir = path.join(process.cwd(), '/markdown')
 
 export const getPosts = async () => {
   const fileNames = await fsPromise.readdir(markdownDir)
-  const list: Post[] = fileNames.map(fileName => {
+  const list: Post[] = fileNames.map((fileName, index) => {
     const filePath = path.join(markdownDir, fileName)
-    const id = fileName.replace(/\.md$/, '')
+    const id = index
     const text = fs.readFileSync(filePath, 'utf-8')
     const {data: {title, date}, content} = matter(text)
     return {
@@ -19,7 +19,7 @@ export const getPosts = async () => {
   return list
 }
 
-export const getPost = async (id: string) => {
+export const getPost = async (id: number) => {
   const filePath = path.join(markdownDir, `${id}.md`)
   const text = fs.readFileSync(filePath, 'utf-8')
   const {data: {title, date}, content} = matter(text)

@@ -13,7 +13,7 @@ type Post = {
   htmlContent?: string;
   createdAt?: string;
   updatedAt?: string;
-  author: User
+  author?: User
 }
 
 declare module '*.png' {
