@@ -1,5 +1,4 @@
 import {NextApiHandler} from 'next';
-import {getPosts} from 'lib/posts';
 import {Post} from '../../../src/entity/Post';
 import {getDatabaseConnection} from '../../../lib/getDatabaseConnection';
 import {withSession} from '../../../lib/withSesstion';
@@ -31,9 +30,21 @@ const Posts: NextApiHandler = async (req, res) => {
     res.statusCode = 200;
     res.write(JSON.stringify(post));
   } else if (req.method === 'GET') {
-    const posts = await getPosts();
+    const connection = await getDatabaseConnection();
+    const size = parseInt((req.query.size || 10).toString());
+    const page = parseInt((req.query.page || 1).toString());
+    const [posts, total] = await connection.manager.findAndCount('Post', {
+      take: size,
+      skip: (page - 1) * size,
+      join: {
+        alias: 'post',
+        leftJoinAndSelect: {
+          author: 'post.author',
+        },
+      },
+    });
     res.statusCode = 200;
-    res.write(JSON.stringify(posts));
+    res.write(JSON.stringify({ posts, total, page, size }));
   }
   res.end();
 };

@@ -1,8 +1,7 @@
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
 import { getDatabaseConnection } from '../../lib/getDatabaseConnection';
-import React from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { userPager } from '../../hooks/usePager';
 import {
   ArticleList,
   Category,
@@ -11,12 +10,13 @@ import {
   LeftSection,
   PageMain,
   PopularList,
-  RightSection, UserHeaderWrapper,
+  RightSection,
 } from '../../styles/posts';
 import ALiIcon from '../../components/ALiIcon';
 import { getFullDate } from '../../utils/date';
 import { withSession } from '../../lib/withSesstion';
 import PageHeader from '../../components/PageHeader';
+import axios from 'axios';
 
 interface Props {
   posts: Post[];
@@ -27,11 +27,36 @@ interface Props {
   user: User;
 }
 
+const defaultSize = 10
 const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
-  const { pager } = userPager(pageOption);
-  const [firstPost, ...otherPosts] = posts;
-  const subPosts = otherPosts.slice(0, 3);
-  const restPosts = otherPosts.slice(3);
+  const fetchData = useRef({
+    page: 1,
+    size: defaultSize,
+  })
+  const [loadMorePostsVisible, setLoadMorePostsVisible] = useState(true)
+  const [postsList, setPostsList] = useState<Post[]>(posts)
+  const {firstPost, subPosts, restPosts} = useMemo(() => {
+    const [firstPost, ...otherPosts] = postsList;
+    const subPosts = otherPosts.slice(0, 3);
+    const restPosts = otherPosts.slice(3);
+    return {firstPost, subPosts, restPosts}
+  }, [postsList])
+
+  const loadMorePosts = useCallback(async () => {
+    fetchData.current = {...fetchData.current, page: fetchData.current.page + 1}
+    const {data} = await axios.request({
+      url: '/api/v1/posts',
+      method: 'get',
+      params: fetchData.current
+    })
+    const {posts} = data;
+    if (posts.length === 0) {
+      setLoadMorePostsVisible(false)
+    } else {
+      if (posts.length < defaultSize) setLoadMorePostsVisible(false)
+      setPostsList([...postsList, ...posts])
+    }
+  }, [])
   return (
     <Container>
       <PageHeader user={user} />
@@ -124,7 +149,9 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
           )) }
         </PopularList>
       </PageMain>
-      { pager }
+      <footer>
+        {loadMorePostsVisible ? <p onClick={loadMorePosts}>点击加载更多，共{pageOption.total}条</p>: <p>暂无更多</p>}
+      </footer>
     </Container>
   );
 };
@@ -133,11 +160,8 @@ export default PostsIndex;
 
 export const getServerSideProps: GetServerSideProps = withSession(async (context: GetServerSidePropsContext) => {
   const connection = await getDatabaseConnection();
-  const size = parseInt((context.query.size || 10).toString());
-  const page = parseInt((context.query.page || 1).toString());
   const [posts, total] = await connection.manager.findAndCount('Post', {
-    take: size,
-    skip: (page - 1) * size,
+    take: 20,
     join: {
       alias: 'post',
       leftJoinAndSelect: {
@@ -152,9 +176,6 @@ export const getServerSideProps: GetServerSideProps = withSession(async (context
       user,
       posts: JSON.parse(JSON.stringify(posts)),
       total,
-      page,
-      size,
-      totalPage: Math.ceil(total / size),
     },
   };
 });
