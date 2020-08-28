@@ -146,8 +146,8 @@ passwd root
 
 ## 安装 docker nginx
 ```
-docker run --name="nginx1" --net="host" -v /home/blog/nginx.conf:/etc/nginx/conf.d/default.conf -d nginx:1.19.1
-docker run --name="nginx1" --net="host" -v /home/blog/nginx.conf:/etc/nginx/conf.d/default.conf -v /blog/app/.next/static/:/usr/share/nginx/html/_next/static -d nginx:1.19.1
+docker run --name="nginx1" --net="host" -v /home/blog/app/nginx.conf:/etc/nginx/conf.d/default.conf -d nginx:1.19.1
+docker run --name="nginx1" --net="host" -v /home/blog/app/nginx.conf:/etc/nginx/conf.d/default.conf -v /home/blog/app/.next/static/:/usr/share/nginx/html/_next/static -d nginx:1.19.1
 docker exec -it nginx1 service nginx reload // 重启 nginx 服务
 // nginx -t // 验证配置
 // nginx -s reload // 重启配置
