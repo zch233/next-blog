@@ -211,3 +211,14 @@ export const PopularList = styled.div`
     }
   }
 `
+export const Footer = styled.footer`
+  text-align: center;
+  margin-bottom: 1em;
+  p {
+    background-color: #f5f5f5;
+    display: inline-block;
+    padding: .7em 1em;
+    cursor: pointer;
+  }
+  
+`

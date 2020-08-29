@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {
   ArticleList,
   Category,
-  CategoryWrapper, Container,
+  CategoryWrapper, Container, Footer,
   LatestPostsWrapper,
   LeftSection,
   PageMain,
@@ -27,39 +27,41 @@ interface Props {
   user: User;
 }
 
-const defaultSize = 10
+const defaultSize = 10;
 const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
   const fetchData = useRef({
     page: 1,
     size: defaultSize,
-  })
-  const [loadMorePostsVisible, setLoadMorePostsVisible] = useState(true)
-  const [postsList, setPostsList] = useState<Post[]>(posts)
-  const {firstPost, subPosts, restPosts} = useMemo(() => {
+  });
+  const [loading, setLoading] = useState(false);
+  const [loadMorePostsVisible, setLoadMorePostsVisible] = useState(true);
+  const [postsList, setPostsList] = useState<Post[]>(posts);
+  const { firstPost, subPosts, restPosts } = useMemo(() => {
     const [firstPost, ...otherPosts] = postsList;
     const subPosts = otherPosts.slice(0, 3);
     const restPosts = otherPosts.slice(3);
-    return {firstPost, subPosts, restPosts}
-  }, [postsList])
+    return { firstPost, subPosts, restPosts };
+  }, [postsList]);
 
   const loadMorePosts = useCallback(async () => {
-    fetchData.current = {...fetchData.current, page: fetchData.current.page + 1}
-    const {data} = await axios.request({
+    setLoading(true);
+    fetchData.current = { ...fetchData.current, page: fetchData.current.page + 1 };
+    const { data } = await axios.request({
       url: '/api/v1/posts',
       method: 'get',
-      params: fetchData.current
-    })
-    const {posts} = data;
+      params: fetchData.current,
+    }).finally(() => setLoading(false));
+    const { posts } = data;
     if (posts.length === 0) {
-      setLoadMorePostsVisible(false)
+      setLoadMorePostsVisible(false);
     } else {
-      if (posts.length < defaultSize) setLoadMorePostsVisible(false)
-      setPostsList([...postsList, ...posts])
+      if (posts.length < defaultSize) setLoadMorePostsVisible(false);
+      setPostsList([...postsList, ...posts]);
     }
-  }, [])
+  }, []);
   return (
     <Container>
-      <PageHeader user={user} />
+      <PageHeader user={ user }/>
       <CategoryWrapper>
         <div><ALiIcon icon={ 'left' }/></div>
         <Category>
@@ -102,7 +104,8 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
                     <p className={ 'content' }>{ post.content }</p>
                   </a>
                 </Link>
-                <p><Link href="/user/[id]" as={ `/user/${ post.author.id }` }><a><span className={ 'author' }>{ post.author.username }</span></a></Link></p>
+                <p><Link href="/user/[id]" as={ `/user/${ post.author.id }` }><a><span
+                  className={ 'author' }>{ post.author.username }</span></a></Link></p>
                 <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
             </article>
@@ -149,9 +152,9 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
           )) }
         </PopularList>
       </PageMain>
-      <footer>
-        {loadMorePostsVisible ? <p onClick={loadMorePosts}>点击加载更多，共{pageOption.total}条</p>: <p>暂无更多</p>}
-      </footer>
+      <Footer>
+        { loading ? <p>正在加载</p> : loadMorePostsVisible ? <p onClick={ loadMorePosts }>点击加载更多，共{ pageOption.total }条</p> : <p>暂无更多</p> }
+      </Footer>
     </Container>
   );
 };
@@ -170,7 +173,7 @@ export const getServerSideProps: GetServerSideProps = withSession(async (context
     },
   });
   // @ts-ignore
-  const user = context.req.session.get('user') || ''
+  const user = context.req.session.get('user') || '';
   return {
     props: {
       user,
