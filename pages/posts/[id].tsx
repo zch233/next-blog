@@ -8,6 +8,12 @@ import styled from 'styled-components';
 import { getFullDate } from '../../utils/date';
 import { useRouter } from 'next/router'
 
+const renderer = {
+  image(text: string) {
+    return `<img src="${text}" referrerPolicy="no-referrer" alt=""/>`
+  }
+};
+marked.use({ renderer });
 interface Props {
   post: Post
 }
@@ -43,7 +49,8 @@ const PostsDetail: NextPage<Props> = ({ post }) => {
       <h1>{ post.title }<span className={ 'author' }>by：{ post.author.username }</span></h1>
       <p className={ 'time' }>{ getFullDate(post.createdAt) }</p>
       <article className="markdown-body" dangerouslySetInnerHTML={ { __html: marked(post.content) } }/>
-      <Link href="/posts"><a className={ 'return returnList' }>返回文章列表</a></Link><span onClick={() => router.back()} className={ 'return returnBack' }>返回</span>
+      <Link href="/posts"><a className={ 'return returnList' }>返回文章列表</a></Link>
+      <span onClick={() => router.back()} className={ 'return returnBack' }>返回</span>
     </Wrapper>
   );
 };
