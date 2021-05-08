@@ -2,12 +2,15 @@ import {NextApiHandler} from 'next';
 import {Post} from '../../../src/entity/Post';
 import {getDatabaseConnection} from '../../../lib/getDatabaseConnection';
 import {withSession} from '../../../lib/withSesstion';
+import marked from 'marked'
 
 const Posts: NextApiHandler = async (req, res) => {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   if (req.method === 'POST') {
     const {title, content} = req.body;
     const post = new Post();
+    // @ts-ignore
+    post.images = content && JSON.stringify(marked.lexer(content).filter(v => v.type === 'paragraph').reduce((a, b) => a.concat(b.tokens), []).filter(v => v.type === 'image').map(v => v.href))
     post.title = title.trim();
     post.content = content.trim();
     await post.validate()

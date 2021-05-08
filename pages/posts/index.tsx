@@ -82,7 +82,11 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
               <Link href={ '/posts/[id]' } as={ `/posts/${ firstPost.id }` }>
                 <a>
                   <div className={ 'imageWrapper' }>
-                    <ALiIcon icon={ 'img' }/>
+                    {
+                      JSON.parse(firstPost.images)[0] ?
+                        <img referrerPolicy={'no-referrer'} src={JSON.parse(firstPost.images)[0]} alt=""/> :
+                        <ALiIcon icon={ 'img' }/>
+                    }
                   </div>
                   <cite className={ 'title' }>{ firstPost.title }</cite>
                   <p className={ 'content' }>{ firstPost.content.substr(0, 100) }...</p>
@@ -99,7 +103,13 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
             <article key={ post.id } className={ 'articleItem' }>
               <Link href={ '/posts/[id]' } as={ `/posts/${ post.id }` }>
                 <a>
-                  <div className={ 'imageWrapper' }><ALiIcon icon={ 'img' }/></div>
+                  <div className={ 'imageWrapper' }>
+                    {
+                      JSON.parse(post.images)[0] ?
+                        <img referrerPolicy={'no-referrer'} src={JSON.parse(post.images)[0]} alt=""/> :
+                        <ALiIcon icon={ 'img' }/>
+                    }
+                  </div>
                 </a>
               </Link>
               <div className={ 'postInfo' }>
@@ -134,7 +144,13 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
               </div>
               <Link href={ '/posts/[id]' } as={ `/posts/${ post.id }` }>
                 <a>
-                  <div className={ 'imageWrapper' }><ALiIcon icon={ 'img' }/></div>
+                  <div className={ 'imageWrapper' }>
+                    {
+                      JSON.parse(post.images)[0] ?
+                      <img referrerPolicy={'no-referrer'} src={JSON.parse(post.images)[0]} alt=""/> :
+                      <ALiIcon icon={ 'img' }/>
+                    }
+                  </div>
                 </a>
               </Link>
             </li>

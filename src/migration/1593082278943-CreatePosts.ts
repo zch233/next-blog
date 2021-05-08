@@ -9,6 +9,7 @@ export class CreatePosts1593082278943 implements MigrationInterface {
         {name: 'id', isGenerated: true, type: 'int', isPrimary: true, generationStrategy: 'increment'},
         {name: 'title', type: 'varchar'},
         {name: 'content', type: 'text'},
+        {name: 'images', type: 'text'},
         {name: 'author_id', type: 'int'},
       ],
     }));

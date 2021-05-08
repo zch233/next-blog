@@ -10,6 +10,7 @@ type Post = {
   date: string;
   title: string;
   content?: string;
+  images: string;
   htmlContent?: string;
   createdAt?: string;
   updatedAt?: string;
