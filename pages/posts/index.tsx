@@ -153,7 +153,7 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
         </PopularList>
       </PageMain>
       <Footer>
-        { loading ? <p>正在加载</p> : loadMorePostsVisible ? <p onClick={ loadMorePosts }>点击加载更多，共{ pageOption.total }条</p> : <p>暂无更多</p> }
+        { loading ? <p>正在加载</p> : loadMorePostsVisible ? <p onClick={ loadMorePosts }>点击加载更多</p> : <p>暂无更多</p> }<span> 共{ pageOption.total }条</span>
       </Footer>
     </Container>
   );
