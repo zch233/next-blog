@@ -56,9 +56,11 @@ type Props = {
 const PageHeader: React.FC<Props> = ({user}) => {
   return (
     <Header>
-      <ImageWrapper>
-        <img width="100%" src={ headerImage } alt=""/>
-      </ImageWrapper>
+      <Link href="/posts"><a>
+        <ImageWrapper>
+          <img width="100%" src={ headerImage } alt=""/>
+        </ImageWrapper>
+      </a></Link>
       <UserInfo>
         <ALiIcon icon={'search'} />
         <ALiIcon icon={'message'} />
