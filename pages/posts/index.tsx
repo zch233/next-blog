@@ -76,18 +76,23 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
       </CategoryWrapper>
       <LatestPostsWrapper>
         <LeftSection>
-          <Link href={ '/posts/[id]' } as={ `/posts/${ firstPost.id }` }>
-            <a>
-              <div className={ 'imageWrapper' }>
-                <ALiIcon icon={ 'img' }/>
-              </div>
-              <cite className={ 'title' }>{ firstPost.title }</cite>
-              <p className={ 'content' }>{ firstPost.content.substr(0, 100) }...</p>
-            </a>
-          </Link>
-          <p><Link href="/user/[id]" as={ `/user/${ firstPost.author.id }` }><a><span
-            className={ 'author' }>{ firstPost.author.username }</span></a></Link></p>
-          <time className={ 'time' }>{ getFullDate(firstPost.createdAt) }</time>
+          {
+            !!Object.keys(firstPost || {}).length &&
+            <>
+              <Link href={ '/posts/[id]' } as={ `/posts/${ firstPost.id }` }>
+                <a>
+                  <div className={ 'imageWrapper' }>
+                    <ALiIcon icon={ 'img' }/>
+                  </div>
+                  <cite className={ 'title' }>{ firstPost.title }</cite>
+                  <p className={ 'content' }>{ firstPost.content.substr(0, 100) }...</p>
+                </a>
+              </Link>
+              <p><Link href="/user/[id]" as={ `/user/${ firstPost.author.id }` }><a><span
+                className={ 'author' }>{ firstPost.author.username }</span></a></Link></p>
+              <time className={ 'time' }>{ getFullDate(firstPost.createdAt) }</time>
+            </>
+          }
         </LeftSection>
         <RightSection>
           { subPosts.map(post => (
