@@ -110,7 +110,8 @@ ssh root@服务器ip
 因为一直在用 github 的 ssh key
 所以就不用再次新建了（一台机器一个 key 就够了），直接上传
 ```
-// ssh-copy-id -i ~/.ssh/id_rsa.pub root@服务器ip
+// ~/.ssh/authorized_keys
+// ssh-copy-id -i ~/.ssh/id_rsa.pub root@服务器ip // ssh-copy-id -i id_rsa root@服务器ip
 ssh-copy-id ssh root@服务器ip
 ```
 以后再次连接就不用在输入密码了
