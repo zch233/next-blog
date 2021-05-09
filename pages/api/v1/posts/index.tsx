@@ -39,6 +39,9 @@ const Posts: NextApiHandler = async (req, res) => {
     const [posts, total] = await connection.manager.findAndCount('Post', {
       take: size,
       skip: (page - 1) * size,
+      order: {
+        createdAt: 'DESC',
+      },
       join: {
         alias: 'post',
         leftJoinAndSelect: {

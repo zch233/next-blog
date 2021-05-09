@@ -154,14 +154,13 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
               {
                 !!JSON.parse(post.images)[0] &&
                 <Link href={ '/posts/[id]' } as={ `/posts/${ post.id }` }>
-                  <a>
+                  <a className={ 'articleItem-image' }>
                     <div className={ 'imageWrapper' }>
-                      <img referrerPolicy={'no-referrer'} src={JSON.parse(post.images)[0]} alt=""/> :
+                      <img referrerPolicy={'no-referrer'} src={JSON.parse(post.images)[0]} alt=""/>
                     </div>
                   </a>
                 </Link>
               }
-
             </li>
           )) }
         </ArticleList>
@@ -195,6 +194,9 @@ export const getServerSideProps: GetServerSideProps = withSession(async (context
   const connection = await getDatabaseConnection();
   const [posts, total] = await connection.manager.findAndCount('Post', {
     take: 20,
+    order: {
+      createdAt: 'DESC',
+    },
     join: {
       alias: 'post',
       leftJoinAndSelect: {
