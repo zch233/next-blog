@@ -71,18 +71,18 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
   return (
     <Container>
       <PageHeader user={ user }/>
-      <CategoryWrapper>
-        <div><ALiIcon icon={ 'left' }/></div>
-        <Category>
-          <li className={ 'item' }>分类一</li>
-          <li className={ 'item' }>分类二</li>
-          <li className={ 'item active' }>分类三</li>
-          <li className={ 'item' }>分类四</li>
-          <li className={ 'item' }>分类五</li>
-          <li className={ 'item' }>分类6</li>
-        </Category>
-        <div><ALiIcon icon={ 'right' }/></div>
-      </CategoryWrapper>
+      {/*<CategoryWrapper>*/}
+      {/*  <div><ALiIcon icon={ 'left' }/></div>*/}
+      {/*  <Category>*/}
+      {/*    <li className={ 'item' }>分类一</li>*/}
+      {/*    <li className={ 'item' }>分类二</li>*/}
+      {/*    <li className={ 'item active' }>分类三</li>*/}
+      {/*    <li className={ 'item' }>分类四</li>*/}
+      {/*    <li className={ 'item' }>分类五</li>*/}
+      {/*    <li className={ 'item' }>分类6</li>*/}
+      {/*  </Category>*/}
+      {/*  <div><ALiIcon icon={ 'right' }/></div>*/}
+      {/*</CategoryWrapper>*/}
       <LatestPostsWrapper>
         <LeftSection>
           {
@@ -151,17 +151,17 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
                   className={ 'author' }>{ post.author.username }</span></a></Link></p>
                 <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
-              <Link href={ '/posts/[id]' } as={ `/posts/${ post.id }` }>
-                <a>
-                  <div className={ 'imageWrapper' }>
-                    {
-                      JSON.parse(post.images)[0] ?
+              {
+                !!JSON.parse(post.images)[0] &&
+                <Link href={ '/posts/[id]' } as={ `/posts/${ post.id }` }>
+                  <a>
+                    <div className={ 'imageWrapper' }>
                       <img referrerPolicy={'no-referrer'} src={JSON.parse(post.images)[0]} alt=""/> :
-                      <ALiIcon icon={ 'img' }/>
-                    }
-                  </div>
-                </a>
-              </Link>
+                    </div>
+                  </a>
+                </Link>
+              }
+
             </li>
           )) }
         </ArticleList>
