@@ -1,7 +1,7 @@
 import {NextApiHandler} from 'next';
-import {Post} from '../../../src/entity/Post';
-import {getDatabaseConnection} from '../../../lib/getDatabaseConnection';
-import {withSession} from '../../../lib/withSesstion';
+import {Post} from '../../../../src/entity/Post';
+import {getDatabaseConnection} from '../../../../lib/getDatabaseConnection';
+import {withSession} from '../../../../lib/withSesstion';
 import marked from 'marked'
 
 const Posts: NextApiHandler = async (req, res) => {
