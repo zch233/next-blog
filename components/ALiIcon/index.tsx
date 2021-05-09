@@ -14,7 +14,7 @@ const Icon = styled.svg`
 const ALiIcon: React.FC<Props> = ({icon, className}) => {
   useEffect(() => {
     if(typeof window !== 'undefined'){
-      require('./svg.ts');
+      require('./svg.js');
     }
   }, [])
   return (
