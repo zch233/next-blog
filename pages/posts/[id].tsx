@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 import { getDatabaseConnection } from '../../lib/getDatabaseConnection';
 import { Post } from '../../src/entity/Post';
@@ -7,6 +7,7 @@ import marked from 'marked';
 import styled from 'styled-components';
 import { getFullDate } from '../../utils/date';
 import { useRouter } from 'next/router'
+import axios from 'axios';
 
 const renderer = {
   image(text: string) {
@@ -33,6 +34,7 @@ const Wrapper = styled.main`
   .time {
     color: #aaa;
     margin-bottom: 30px;
+    span {font-size: 12px;}
   }
   .return {
     color: #c03;
@@ -44,10 +46,16 @@ const Wrapper = styled.main`
 `;
 const PostsDetail: NextPage<Props> = ({ post }) => {
   const router = useRouter()
+  const postViewed = async () => {
+    await axios.post('/api/v1/posts/views', {postId: router.query.id})
+  }
+  useEffect(() => {
+    postViewed()
+  }, [])
   return (
     <Wrapper>
       <h1>{ post.title }<span className={ 'author' }>by：{ post.author.username }</span></h1>
-      <p className={ 'time' }>{ getFullDate(post.createdAt) }</p>
+      <p className={ 'time' }>{ getFullDate(post.createdAt) } <span>浏览量：{post.views}</span></p>
       <article className="markdown-body" dangerouslySetInnerHTML={ { __html: marked(post.content) } }/>
       <Link href="/posts"><a className={ 'return returnList' }>返回文章列表</a></Link>
       <span onClick={() => router.back()} className={ 'return returnBack' }>返回</span>

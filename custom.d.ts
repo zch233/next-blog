@@ -11,6 +11,7 @@ type Post = {
   title: string;
   content?: string;
   images: string;
+  views: number;
   htmlContent?: string;
   createdAt?: string;
   updatedAt?: string;
