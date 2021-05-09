@@ -1,6 +1,6 @@
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
 import { getDatabaseConnection } from '../../lib/getDatabaseConnection';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   ArticleList,
@@ -35,6 +35,7 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
   });
   const [loading, setLoading] = useState(false);
   const [loadMorePostsVisible, setLoadMorePostsVisible] = useState(true);
+  const [hotRank, setHotRank] = useState<Post[]>([])
   const [postsList, setPostsList] = useState<Post[]>(posts);
   const { firstPost, subPosts, restPosts } = useMemo(() => {
     const [firstPost, ...otherPosts] = postsList;
@@ -59,6 +60,14 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
       setPostsList([...postsList, ...posts]);
     }
   }, []);
+
+  const getHotRank = async () => {
+    const {data} = await axios.get('/api/v1/posts/hot')
+    setHotRank(data)
+  }
+  useEffect(() => {
+    getHotRank()
+  }, [])
   return (
     <Container>
       <PageHeader user={ user }/>
@@ -158,7 +167,7 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
         </ArticleList>
         <PopularList>
           <h4>最近一周最热</h4>
-          { posts.slice(0, 5).map((post, index) => (
+          { hotRank.map((post, index) => (
             <div key={ post.id } className={ 'popularItem' }>
               <em>0{ index + 1 }</em>
               <div className={ 'popularItem-info' }>
