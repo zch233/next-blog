@@ -9,6 +9,8 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid #ddd;
+    img {width: 100%;}
     svg {color:#aaa;font-size:30px;}
   }
   .title {
@@ -175,9 +177,9 @@ export const ArticleList = styled.ul`
         margin-bottom: 12px;
       }
     }
+    &-image {margin-left: 25px;}
     .imageWrapper {
       width: 150px;
-      margin-left: 25px;
       height: 150px;
       overflow: hidden;
       background-color: #ddd;
