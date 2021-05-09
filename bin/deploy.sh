@@ -8,6 +8,7 @@ echo "SECRET_COOKIE_PASSWORD=c2a85490-cc60-4f21-94e8-8dc5dd32" > .env.local &&
 git pull &&
 yarn install --production=false &&
 yarn compile &&
+yarn migration:revert &&
 yarn migration:run &&
 yarn build &&
 docker build -t zch/node-web-app . &&
