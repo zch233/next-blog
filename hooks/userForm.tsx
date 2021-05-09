@@ -66,7 +66,7 @@ export function userForm<T> (userFormOptions: UserFormOptions<T>) {
           <Errors errors={ errors[field.key] }/>
         </div>
       )) }
-      { submitContent || <input type="submit"/> }
+      { submitContent || <input type="submit"/> } <a href={void(0)} onClick={() => router.back()}><button type={'button'}>返回</button></a>
     </form>
   );
   return { form };
