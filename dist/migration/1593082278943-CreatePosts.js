@@ -49,6 +49,10 @@ var CreatePosts1593082278943 = /*#__PURE__*/function () {
                     name: 'images',
                     type: 'text'
                   }, {
+                    name: 'views',
+                    type: 'int',
+                    "default": 0
+                  }, {
                     name: 'author_id',
                     type: 'int'
                   }]

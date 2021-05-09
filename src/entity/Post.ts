@@ -26,6 +26,8 @@ export class Post {
   @Column('text')
   images: string;
   @Column('int')
+  views: number;
+  @Column('int')
   authorId: number;
   @CreateDateColumn({type: 'timestamp'})
   createdAt: Date;
@@ -52,6 +54,6 @@ export class Post {
     return !!Object.values(this.errors).find(v => v.length > 0);
   }
   toJSON () {
-    return {id: this.id, title: this.title, content: this.content, images: this.images, createdAt: this.createdAt, updatedAt: this.updatedAt, author: this.author}
+    return {id: this.id, title: this.title, content: this.content, images: this.images, views: this.views, createdAt: this.createdAt, updatedAt: this.updatedAt, author: this.author}
   }
 }
