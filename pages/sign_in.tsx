@@ -29,13 +29,13 @@ const SignIn: NextPage<{ user: User }> = (props) => {
       const redirect = queryString.parse(window.location.search).redirect;
       await router.push(redirect?.toString() || '/posts');
     },
+    submitContent: <><input type="submit"/><input onClick={ () => router.push('/sign_up') } type="button" value="立即注册"/></>
   });
   return (
     <>
       { props.user && `${props.user.username}，您已登录` }
       <h1>登陆</h1>
       { form }
-      <input onClick={ () => router.push('/sign_up') } type="button" value="注册"/>
     </>
   );
 };
