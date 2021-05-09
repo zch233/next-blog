@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 type Props = {
@@ -12,6 +12,11 @@ const Icon = styled.svg`
   overflow: hidden;
 `;
 const ALiIcon: React.FC<Props> = ({icon, className}) => {
+  useEffect(() => {
+    if(typeof window !== 'undefined'){
+      require('./svg.ts');
+    }
+  }, [])
   return (
     <Icon className={className} aria-hidden="true">
       <use xlinkHref={`#icon-${icon}`}></use>

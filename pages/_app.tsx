@@ -10,7 +10,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Blog</title>
         <link rel="icon" href="/favicon.ico" />
-        <script src="//at.alicdn.com/t/font_2022873_ym54clcfxme.js"></script>
       </Head>
       <Component {...pageProps} />
     </>
