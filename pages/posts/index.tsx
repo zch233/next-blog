@@ -68,6 +68,11 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
   useEffect(() => {
     getHotRank()
   }, [])
+
+  const Author = (props: {author: User}) => (
+    <Link href="/user/[id]" as={ `/user/${ props.author.id }` }><a><span
+      className={ 'author' }>{ props.author.username }</span></a></Link>
+  )
   return (
     <Container>
       <PageHeader user={ user }/>
@@ -101,8 +106,7 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
                   <p className={ 'content' }>{ firstPost.content.substr(0, 100) }...</p>
                 </a>
               </Link>
-              <p><Link href="/user/[id]" as={ `/user/${ firstPost.author.id }` }><a><span
-                className={ 'author' }>{ firstPost.author.username }</span></a></Link></p>
+              <p><Author author={firstPost.author} /></p>
               <time className={ 'time' }>{ getFullDate(firstPost.createdAt) }</time>
             </>
           }
@@ -128,8 +132,7 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
                     <p className={ 'content' }>{ post.content }</p>
                   </a>
                 </Link>
-                <p><Link href="/user/[id]" as={ `/user/${ post.author.id }` }><a><span
-                  className={ 'author' }>{ post.author.username }</span></a></Link></p>
+                <p><Author author={post.author} /></p>
                 <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
             </article>
@@ -147,8 +150,7 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
                     <p className={ 'content' }>{ post.content.substr(0, 150) }...</p>
                   </a>
                 </Link>
-                <p><Link href="/user/[id]" as={ `/user/${ post.author.id }` }><a><span
-                  className={ 'author' }>{ post.author.username }</span></a></Link></p>
+                <p><Author author={post.author} /></p>
                 <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
               {
@@ -173,8 +175,7 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
                 <Link href={ '/posts/[id]' } as={ `/posts/${ post.id }` }>
                   <a><cite className={ 'title' }>{ post.title }</cite></a>
                 </Link>
-                <p><Link href="/user/[id]" as={ `/user/${ post.author.id }` }><a><span
-                  className={ 'author' }>{ post.author.username }</span></a></Link></p>
+                <p><Author author={post.author} /></p>
                 <time className={ 'time' }>{ getFullDate(post.createdAt) }</time>
               </div>
             </div>
