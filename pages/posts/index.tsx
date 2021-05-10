@@ -70,8 +70,9 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
   }, [])
 
   const Author = (props: {author: User}) => (
-    <Link href="/user/[id]" as={ `/user/${ props.author.id }` }><a><span
-      className={ 'author' }>{ props.author.username }</span></a></Link>
+    <Link href="/user/[id]" as={ `/user/${ props.author.id }` }>
+      <a><span className={ 'author' }><ALiIcon icon={'defaultAvatar'} />{ props.author.username }</span></a>
+    </Link>
   )
   return (
     <Container>

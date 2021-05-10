@@ -27,6 +27,7 @@ export const Container = styled.div`
     &:hover {
       text-decoration: underline;
     }
+    > svg {margin-right: 8px;font-size: 20px;}
   }
   .content {
     font-weight: 400;
