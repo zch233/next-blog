@@ -2,33 +2,10 @@ import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
 import { getDatabaseConnection } from '../../lib/getDatabaseConnection';
 import React from 'react';
 import { withSession } from '../../lib/withSesstion';
-import styled from 'styled-components';
 import PostsListPage from '../../components/PostsListPage';
 import { useRouter } from 'next/router';
 import {Like} from 'typeorm'
 
-const Container = styled.div`
-  max-width: 1200px;
-  min-width: 900px;
-  margin: 0 auto;
-  padding: 0 10px;
-  .authorTitle {
-    margin: 1em 0;
-  }
-  .posts {
-    margin-bottom: 2em;
-  }
-  .postItem {
-    border-bottom: 1px solid #ddd;
-    padding: .7em 0;
-    font-size: 18px;
-    .content {
-      color: #999;
-      font-size: 14px;
-      margin-top: .4em;
-    }
-  }
-`
 interface Props {
   posts: Post[];
   total: number;
