@@ -4,7 +4,7 @@ import {getDatabaseConnection} from '../../../../lib/getDatabaseConnection';
 
 const Views: NextApiHandler = async (req, res) => {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  if (req.method === 'POST') {
+  if (req.method === 'PUT') {
     const {postId} = req.body;
     const connection = await getDatabaseConnection();
     const post = await connection.manager.findOne('Post', {id: postId}) as  Post

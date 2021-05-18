@@ -47,7 +47,7 @@ const Wrapper = styled.main`
 const PostsDetail: NextPage<Props> = ({ post }) => {
   const router = useRouter()
   const postViewed = async () => {
-    await axios.post('/api/v1/posts/views', {postId: router.query.id})
+    await axios.put('/api/v1/posts/views', {postId: router.query.id})
   }
   useEffect(() => {
     postViewed()
