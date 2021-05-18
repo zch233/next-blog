@@ -1,11 +1,9 @@
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
 import { getDatabaseConnection } from '../../lib/getDatabaseConnection';
 import React from 'react';
-import Link from 'next/link';
-import { userPager } from '../../hooks/usePager';
 import { withSession } from '../../lib/withSesstion';
-import PageHeader from '../../components/PageHeader';
 import styled from 'styled-components';
+import PostsListPage from '../../components/PostsListPage';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -38,21 +36,13 @@ interface Props {
   user: User;
 }
 
-const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
-  const { pager } = userPager(pageOption);
+const UserIndex: NextPage<Props> = (props) => {
   return (
-    <Container>
-      <PageHeader user={user} />
-      <h1 className={'authorTitle'}>{posts[0].author.username}的博客</h1>
-      <section className={'posts'}>
-        {posts.map(post => <Link href="/posts/[id]" key={post.id} as={`/posts/${post.id}`}><a><div className={'postItem'}><p className={'postItem-title'}>{post.title}</p><p className={'content'}>{post.content.slice(0, 100)}...</p></div></a></Link>)}
-      </section>
-      { pager }
-    </Container>
+    <PostsListPage pageTitle={props.posts[0].author.username} {...props} />
   );
 };
 
-export default PostsIndex;
+export default UserIndex;
 
 export const getServerSideProps: GetServerSideProps = withSession(async (context: GetServerSidePropsContext) => {
   const connection = await getDatabaseConnection();

@@ -4,6 +4,7 @@ import ALiIcon from '../ALiIcon';
 import Link from 'next/link';
 import logoImage from '../../assets/logo.png';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Header = styled.header`
   display: flex;
@@ -75,8 +76,9 @@ type Props = {
 const PageHeader: React.FC<Props> = ({user}) => {
   const [searchBarHidden, setSearchBarHidden] = useState(true)
   const [searchWord, setSearchWord] = useState('')
-  const search = useCallback(() => {
-    console.log(searchWord);
+  const search = useCallback(async () => {
+    const {data} = await axios.get('/api/v1/posts', {params: {title: searchWord}})
+    console.log(data);
   }, [searchWord])
   return (
     <Header>
