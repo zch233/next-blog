@@ -4,7 +4,7 @@ import styled from 'styled-components';
 type Props = {
   icon: string;
   className?: string;
-  onClick?: (e?:Event) => void;
+  onClick?: (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }
 const Icon = styled.svg`
   width: 1em; height: 1em;
@@ -20,7 +20,7 @@ const ALiIcon: React.FC<Props> = ({icon, className, onClick}) => {
   }, [])
   return (
     <Icon className={className} aria-hidden="true" onClick={onClick}>
-      <use xlinkHref={`#icon-${icon}`}></use>
+      <use xlinkHref={`#icon-${icon}`} />
     </Icon>
   );
 };
