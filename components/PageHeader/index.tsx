@@ -4,7 +4,6 @@ import ALiIcon from '../ALiIcon';
 import Link from 'next/link';
 import logoImage from '../../assets/logo.png';
 import styled from 'styled-components';
-import axios from 'axios';
 import { useRouter } from 'next/router';
 
 const Header = styled.header`
@@ -79,6 +78,7 @@ const PageHeader: React.FC<Props> = ({user}) => {
   const [searchWord, setSearchWord] = useState('')
   const router = useRouter()
   const search = useCallback(() => {
+    if (searchWord.trim() === '') return
     router.push(`/posts/results?word=${searchWord}`)
   }, [searchWord])
   return (
