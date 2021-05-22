@@ -11,11 +11,16 @@ type Post = {
   title: string;
   content?: string;
   images: string;
+  category: string;
   views: number;
   htmlContent?: string;
   createdAt?: string;
   updatedAt?: string;
   author?: User
+}
+type Category = {
+  id: number;
+  name: string;
 }
 
 declare module '*.png' {
