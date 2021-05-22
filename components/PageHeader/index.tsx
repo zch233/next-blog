@@ -74,9 +74,9 @@ type Props = {
   user: User;
 }
 const PageHeader: React.FC<Props> = ({user}) => {
-  const [searchBarHidden, setSearchBarHidden] = useState(true)
-  const [searchWord, setSearchWord] = useState('')
   const router = useRouter()
+  const [searchBarHidden, setSearchBarHidden] = useState(true)
+  const [searchWord, setSearchWord] = useState(router.query.word?.toString() || '')
   const search = useCallback(() => {
     if (searchWord.trim() === '') return
     router.push(`/posts/results?word=${searchWord}`)
