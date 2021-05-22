@@ -49,7 +49,7 @@ var CreatePosts1593082278943 = /*#__PURE__*/function () {
                     name: 'images',
                     type: 'text'
                   }, {
-                    name: 'category',
+                    name: 'categoryId',
                     type: 'int'
                   }, {
                     name: 'views',

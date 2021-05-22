@@ -29,7 +29,7 @@ export class Post {
   @Column('int')
   views: number;
   @Column('int')
-  category: number | string;
+  categoryId: number | string;
   @Column('int')
   authorId: number;
   @CreateDateColumn({type: 'timestamp'})
@@ -38,6 +38,8 @@ export class Post {
   updatedAt: Date;
   @ManyToOne('User', 'posts')
   author: User;
+  @ManyToOne('Category', 'posts')
+  category: Category;
   @OneToMany('Comment', 'post')
   comments: Comment[];
 
@@ -53,7 +55,7 @@ export class Post {
     if (!this.content) {
       this.errors.content.push('内容不能为空');
     }
-    if (!this.category) {
+    if (!this.categoryId) {
       this.errors.category.push('分类不能为空');
     }
   };
@@ -61,6 +63,6 @@ export class Post {
     return !!Object.values(this.errors).find(v => v.length > 0);
   }
   toJSON () {
-    return {id: this.id, title: this.title, content: this.content, images: this.images, views: this.views, createdAt: this.createdAt, updatedAt: this.updatedAt, author: this.author}
+    return {id: this.id, title: this.title, content: this.content, images: this.images, views: this.views, category: this.category, createdAt: this.createdAt, updatedAt: this.updatedAt, author: this.author}
   }
 }
