@@ -68,19 +68,7 @@ var CreateCategories1621687250956 = /*#__PURE__*/function () {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return queryRunner.dropTable(new _typeorm.Table({
-                  name: 'categories',
-                  columns: [{
-                    name: 'id',
-                    isGenerated: true,
-                    type: 'int',
-                    isPrimary: true,
-                    generationStrategy: 'increment'
-                  }, {
-                    name: 'name',
-                    type: 'varchar'
-                  }]
-                }));
+                return queryRunner.dropTable('categories');
 
               case 2:
               case "end":

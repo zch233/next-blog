@@ -13,13 +13,7 @@ export class CreateCategories1621687250956 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(new Table({
-            name: 'categories',
-            columns: [
-                {name: 'id', isGenerated: true, type: 'int', isPrimary: true, generationStrategy: 'increment'},
-                {name: 'name', type: 'varchar'},
-            ],
-        }));
+        await queryRunner.dropTable('categories');
     }
 
 }
