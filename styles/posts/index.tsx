@@ -95,11 +95,21 @@ export const Category = styled.ul`
   list-style: none;
   flex: 1;
   display: inline-flex;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding: 6px 0;
+  &::-webkit-scrollbar-track-piece {background: #fff;}
+  &::-webkit-scrollbar {height: 5px;}
+  &::-webkit-scrollbar-thumb {background: #ddd;border-radius: 5px;}
   .item {
-    margin: 0 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-right: 10px;
     color: rgba(0,0,0,.54);
     transition: all .3s;
-    &.active {
+    cursor: pointer;
+    user-select: none;
+    &.active, &:hover {
       color: rgba(0,0,0,.84);
     }
   }

@@ -78,16 +78,15 @@ const PostsIndex: NextPage<Props> = ({ user, posts, ...pageOption }) => {
     <Container>
       <PageHeader user={ user }/>
       <CategoryWrapper>
-        <div><ALiIcon icon={ 'left' }/></div>
+        {/*<div><ALiIcon icon={ 'left' }/></div>*/}
         <Category>
           <li className={ 'item' }>分类一</li>
           <li className={ 'item' }>分类二</li>
           <li className={ 'item active' }>分类三</li>
           <li className={ 'item' }>分类四</li>
           <li className={ 'item' }>分类五</li>
-          <li className={ 'item' }>分类6</li>
         </Category>
-        <div><ALiIcon icon={ 'right' }/></div>
+        {/*<div><ALiIcon icon={ 'right' }/></div>*/}
       </CategoryWrapper>
       <LatestPostsWrapper>
         <LeftSection>
