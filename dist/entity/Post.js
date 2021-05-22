@@ -25,13 +25,13 @@ var _initializerWarningHelper2 = _interopRequireDefault(require("@babel/runtime/
 
 var _typeorm = require("typeorm");
 
-var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _temp;
+var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _temp;
 
-var Post = (_dec = (0, _typeorm.Entity)('posts'), _dec2 = (0, _typeorm.PrimaryGeneratedColumn)('increment'), _dec3 = (0, _typeorm.Column)('varchar'), _dec4 = (0, _typeorm.Column)('text'), _dec5 = (0, _typeorm.Column)('text'), _dec6 = (0, _typeorm.Column)('int'), _dec7 = (0, _typeorm.Column)('int'), _dec8 = (0, _typeorm.CreateDateColumn)({
+var Post = (_dec = (0, _typeorm.Entity)('posts'), _dec2 = (0, _typeorm.PrimaryGeneratedColumn)('increment'), _dec3 = (0, _typeorm.Column)('varchar'), _dec4 = (0, _typeorm.Column)('text'), _dec5 = (0, _typeorm.Column)('text'), _dec6 = (0, _typeorm.Column)('int'), _dec7 = (0, _typeorm.Column)('int'), _dec8 = (0, _typeorm.Column)('int'), _dec9 = (0, _typeorm.CreateDateColumn)({
   type: 'timestamp'
-}), _dec9 = (0, _typeorm.UpdateDateColumn)({
+}), _dec10 = (0, _typeorm.UpdateDateColumn)({
   type: 'timestamp'
-}), _dec10 = (0, _typeorm.ManyToOne)('User', 'posts'), _dec11 = (0, _typeorm.OneToMany)('Comment', 'post'), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function () {
+}), _dec11 = (0, _typeorm.ManyToOne)('User', 'posts'), _dec12 = (0, _typeorm.OneToMany)('Comment', 'post'), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function () {
   function Post() {
     (0, _classCallCheck2["default"])(this, Post);
     (0, _initializerDefineProperty2["default"])(this, "id", _descriptor, this);
@@ -39,14 +39,16 @@ var Post = (_dec = (0, _typeorm.Entity)('posts'), _dec2 = (0, _typeorm.PrimaryGe
     (0, _initializerDefineProperty2["default"])(this, "content", _descriptor3, this);
     (0, _initializerDefineProperty2["default"])(this, "images", _descriptor4, this);
     (0, _initializerDefineProperty2["default"])(this, "views", _descriptor5, this);
-    (0, _initializerDefineProperty2["default"])(this, "authorId", _descriptor6, this);
-    (0, _initializerDefineProperty2["default"])(this, "createdAt", _descriptor7, this);
-    (0, _initializerDefineProperty2["default"])(this, "updatedAt", _descriptor8, this);
-    (0, _initializerDefineProperty2["default"])(this, "author", _descriptor9, this);
-    (0, _initializerDefineProperty2["default"])(this, "comments", _descriptor10, this);
+    (0, _initializerDefineProperty2["default"])(this, "category", _descriptor6, this);
+    (0, _initializerDefineProperty2["default"])(this, "authorId", _descriptor7, this);
+    (0, _initializerDefineProperty2["default"])(this, "createdAt", _descriptor8, this);
+    (0, _initializerDefineProperty2["default"])(this, "updatedAt", _descriptor9, this);
+    (0, _initializerDefineProperty2["default"])(this, "author", _descriptor10, this);
+    (0, _initializerDefineProperty2["default"])(this, "comments", _descriptor11, this);
     (0, _defineProperty2["default"])(this, "errors", {
       title: [],
-      content: []
+      content: [],
+      category: []
     });
   }
 
@@ -58,15 +60,19 @@ var Post = (_dec = (0, _typeorm.Entity)('posts'), _dec2 = (0, _typeorm.PrimaryGe
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (this.title === '') {
+                if (!this.title) {
                   this.errors.title.push('标题不能为空');
                 }
 
-                if (this.content === '') {
+                if (!this.content) {
                   this.errors.content.push('内容不能为空');
                 }
 
-              case 2:
+                if (!this.category) {
+                  this.errors.category.push('分类不能为空');
+                }
+
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -128,27 +134,32 @@ var Post = (_dec = (0, _typeorm.Entity)('posts'), _dec2 = (0, _typeorm.PrimaryGe
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor6 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "authorId", [_dec7], {
+}), _descriptor6 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "category", [_dec7], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor7 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "createdAt", [_dec8], {
+}), _descriptor7 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "authorId", [_dec8], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor8 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "updatedAt", [_dec9], {
+}), _descriptor8 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "createdAt", [_dec9], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor9 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "author", [_dec10], {
+}), _descriptor9 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "updatedAt", [_dec10], {
   configurable: true,
   enumerable: true,
   writable: true,
   initializer: null
-}), _descriptor10 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "comments", [_dec11], {
+}), _descriptor10 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "author", [_dec11], {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  initializer: null
+}), _descriptor11 = (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "comments", [_dec12], {
   configurable: true,
   enumerable: true,
   writable: true,
