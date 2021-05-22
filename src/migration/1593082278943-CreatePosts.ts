@@ -10,6 +10,7 @@ export class CreatePosts1593082278943 implements MigrationInterface {
         {name: 'title', type: 'varchar'},
         {name: 'content', type: 'text'},
         {name: 'images', type: 'text'},
+        {name: 'category', type: 'int'},
         {name: 'views', type: 'int', default: 0},
         {name: 'author_id', type: 'int'},
       ],

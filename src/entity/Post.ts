@@ -13,6 +13,7 @@ import {User} from './User';
 interface Errors {
   title: string[],
   content: string[],
+  category: string[],
 }
 
 @Entity('posts')
@@ -28,6 +29,8 @@ export class Post {
   @Column('int')
   views: number;
   @Column('int')
+  category: number | string;
+  @Column('int')
   authorId: number;
   @CreateDateColumn({type: 'timestamp'})
   createdAt: Date;
@@ -41,13 +44,17 @@ export class Post {
   errors: Errors = {
     title: [],
     content: [],
+    category: [],
   };
   async validate () {
-    if (this.title === '') {
+    if (!this.title) {
       this.errors.title.push('标题不能为空');
     }
-    if (this.content === '') {
+    if (!this.content) {
       this.errors.content.push('内容不能为空');
+    }
+    if (!this.category) {
+      this.errors.category.push('分类不能为空');
     }
   };
   hasError () {
