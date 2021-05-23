@@ -1,11 +1,10 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Post } from './Post';
 
 @Entity('categories')
 export class Category {
   @PrimaryGeneratedColumn('increment')
   id: number;
-  @Column('text')
+  @Column('varchar')
   name: string;
   @OneToMany('Post', 'category')
   posts: Post[];

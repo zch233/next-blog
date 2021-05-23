@@ -31,7 +31,7 @@ var Post = (_dec = (0, _typeorm.Entity)('posts'), _dec2 = (0, _typeorm.PrimaryGe
   type: 'timestamp'
 }), _dec10 = (0, _typeorm.UpdateDateColumn)({
   type: 'timestamp'
-}), _dec11 = (0, _typeorm.ManyToOne)('User', 'posts'), _dec12 = (0, _typeorm.ManyToOne)('Category', 'posts'), _dec13 = (0, _typeorm.OneToMany)('Comment', 'posts'), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function () {
+}), _dec11 = (0, _typeorm.ManyToOne)('User', 'posts'), _dec12 = (0, _typeorm.ManyToOne)('Category', 'posts'), _dec13 = (0, _typeorm.OneToMany)('Comment', 'post'), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function () {
   function Post() {
     (0, _classCallCheck2["default"])(this, Post);
     (0, _initializerDefineProperty2["default"])(this, "id", _descriptor, this);

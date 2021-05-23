@@ -1,6 +1,4 @@
 import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
-import {User} from "./User";
-import {Post} from "./Post";
 
 @Entity('comments')
 export class Comment {

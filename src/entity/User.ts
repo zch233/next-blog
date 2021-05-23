@@ -7,8 +7,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {Post} from './Post';
-import {Comment} from './Comment';
 
 interface Errors {
   username: string[],
