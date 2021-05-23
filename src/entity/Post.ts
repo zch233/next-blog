@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import {Comment} from './Comment';
 import {User} from './User';
+import {Category} from './Category';
 
 interface Errors {
   title: string[],
@@ -40,7 +41,7 @@ export class Post {
   author: User;
   @ManyToOne('Category', 'posts')
   category: Category;
-  @OneToMany('Comment', 'post')
+  @OneToMany('Comment', 'posts')
   comments: Comment[];
 
   errors: Errors = {
