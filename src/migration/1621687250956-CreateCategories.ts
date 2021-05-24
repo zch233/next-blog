@@ -8,6 +8,8 @@ export class CreateCategories1621687250956 implements MigrationInterface {
             columns: [
                 {name: 'id', isGenerated: true, type: 'int', isPrimary: true, generationStrategy: 'increment'},
                 {name: 'name', type: 'varchar', isUnique: true},
+                {name: 'createdAt', type: 'timestamp', isNullable: false, default: 'now()'},
+                {name: 'updatedAt', type: 'timestamp', isNullable: false, default: 'now()'},
             ],
         }));
     }

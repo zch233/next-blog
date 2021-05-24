@@ -43,6 +43,16 @@ var CreateCategories1621687250956 = /*#__PURE__*/function () {
                     name: 'name',
                     type: 'varchar',
                     isUnique: true
+                  }, {
+                    name: 'createdAt',
+                    type: 'timestamp',
+                    isNullable: false,
+                    "default": 'now()'
+                  }, {
+                    name: 'updatedAt',
+                    type: 'timestamp',
+                    isNullable: false,
+                    "default": 'now()'
                   }]
                 }));
 
