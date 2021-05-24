@@ -47,7 +47,7 @@ var Category = (_dec = (0, _typeorm.Entity)('categories'), _dec2 = (0, _typeorm.
   (0, _createClass2["default"])(Category, [{
     key: "validate",
     value: function () {
-      var _validate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(connection) {
+      var _validate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(connection, update) {
         var hasCategory;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
@@ -57,19 +57,24 @@ var Category = (_dec = (0, _typeorm.Entity)('categories'), _dec2 = (0, _typeorm.
                   this.errors.name.push('名称不能为空');
                 }
 
-                _context.next = 3;
+                if (update) {
+                  _context.next = 6;
+                  break;
+                }
+
+                _context.next = 4;
                 return connection.manager.findOne(Category, {
                   name: this.name
                 });
 
-              case 3:
+              case 4:
                 hasCategory = _context.sent;
 
                 if (hasCategory) {
                   this.errors.name.push('该标签已存在');
                 }
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -77,7 +82,7 @@ var Category = (_dec = (0, _typeorm.Entity)('categories'), _dec2 = (0, _typeorm.
         }, _callee, this);
       }));
 
-      function validate(_x) {
+      function validate(_x, _x2) {
         return _validate.apply(this, arguments);
       }
 

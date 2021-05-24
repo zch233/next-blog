@@ -28,13 +28,15 @@ export class Category {
   errors: Errors = {
     name: [],
   };
-  async validate (connection: Connection) {
+  async validate (connection: Connection, update?:boolean) {
     if (!this.name) {
       this.errors.name.push('名称不能为空');
     }
-    const hasCategory = await connection.manager.findOne(Category, {name: this.name});
-    if (hasCategory) {
-      this.errors.name.push('该标签已存在');
+    if (!update) {
+      const hasCategory = await connection.manager.findOne(Category, {name: this.name});
+      if (hasCategory) {
+        this.errors.name.push('该标签已存在');
+      }
     }
   };
   hasError () {
