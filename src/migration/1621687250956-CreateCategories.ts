@@ -7,7 +7,7 @@ export class CreateCategories1621687250956 implements MigrationInterface {
             name: 'categories',
             columns: [
                 {name: 'id', isGenerated: true, type: 'int', isPrimary: true, generationStrategy: 'increment'},
-                {name: 'name', type: 'varchar'},
+                {name: 'name', type: 'varchar', isUnique: true},
             ],
         }));
     }

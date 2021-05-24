@@ -41,7 +41,8 @@ var CreateCategories1621687250956 = /*#__PURE__*/function () {
                     generationStrategy: 'increment'
                   }, {
                     name: 'name',
-                    type: 'varchar'
+                    type: 'varchar',
+                    isUnique: true
                   }]
                 }));
 
