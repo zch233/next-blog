@@ -47,7 +47,8 @@ var Category = (_dec = (0, _typeorm.Entity)('categories'), _dec2 = (0, _typeorm.
   (0, _createClass2["default"])(Category, [{
     key: "validate",
     value: function () {
-      var _validate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+      var _validate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(connection) {
+        var hasCategory;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -56,7 +57,19 @@ var Category = (_dec = (0, _typeorm.Entity)('categories'), _dec2 = (0, _typeorm.
                   this.errors.name.push('名称不能为空');
                 }
 
-              case 1:
+                _context.next = 3;
+                return connection.manager.findOne(Category, {
+                  name: this.name
+                });
+
+              case 3:
+                hasCategory = _context.sent;
+
+                if (hasCategory) {
+                  this.errors.name.push('该标签已存在');
+                }
+
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -64,7 +77,7 @@ var Category = (_dec = (0, _typeorm.Entity)('categories'), _dec2 = (0, _typeorm.
         }, _callee, this);
       }));
 
-      function validate() {
+      function validate(_x) {
         return _validate.apply(this, arguments);
       }
 
@@ -76,6 +89,16 @@ var Category = (_dec = (0, _typeorm.Entity)('categories'), _dec2 = (0, _typeorm.
       return !!Object.values(this.errors).find(function (v) {
         return v.length > 0;
       });
+    }
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return {
+        id: this.id,
+        name: this.name,
+        createdAt: this.createdAt,
+        updatedAt: this.updatedAt
+      };
     }
   }]);
   return Category;

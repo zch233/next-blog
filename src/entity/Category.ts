@@ -1,4 +1,12 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  Connection,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 interface Errors {
   name: string[],
@@ -20,12 +28,19 @@ export class Category {
   errors: Errors = {
     name: [],
   };
-  async validate () {
+  async validate (connection: Connection) {
     if (!this.name) {
       this.errors.name.push('名称不能为空');
+    }
+    const hasCategory = await connection.manager.findOne(Category, {name: this.name});
+    if (hasCategory) {
+      this.errors.name.push('该标签已存在');
     }
   };
   hasError () {
     return !!Object.values(this.errors).find(v => v.length > 0);
+  }
+  toJSON () {
+    return {id: this.id, name: this.name, createdAt: this.createdAt, updatedAt: this.updatedAt}
   }
 }
